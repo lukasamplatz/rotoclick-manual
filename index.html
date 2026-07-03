@@ -86,6 +86,10 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
   .hg{grid-template-columns:1fr}
   .fig2{grid-template-columns:1fr}
 }
+
+.pg-nav{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--g2)}
+.pg-nav-back{color:var(--g4);font-size:13px;font-weight:600;border-bottom:1.5px solid var(--g2);cursor:pointer;text-decoration:none}
+.pg-nav-back:hover{color:var(--black);border-bottom-color:var(--black)}
 </style>
 </head>
 <body>
@@ -177,7 +181,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p>Sowie im Ordner <strong>modelcreator/plates</strong> die fünf Konfigurationen 1U1L, 1U2L, 2U1L, 2U2L und XL:</p>
 <div class="fig"><img src="img_006.jpg"><p class="cap">Konfigurationsordner unter modelcreator/plates</p></div>
 
-<div class="nb">Nach erfolgreicher Installation können Sie mit den RotoClick-Protokollen in Exocad fortfahren.<br><br><span class="pl" onclick="go('artiregister')">&#8594; Weiter zur ARTIREGISTER Anleitung</span></div>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Übersicht</span><span class="pl" onclick="go('artiregister')">&#8594; ARTIREGISTER</span></div>
 </div>
 <div class="pg" id="p-install-it"><p class="pr">Rev.1 — 19/06/2026</p><h1>Librerie Exocad</h1><p class="ps">Installazione delle librerie RotoClick in Exocad</p>
 <h2>Download della libreria</h2>
@@ -198,7 +202,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p>E nella cartella <strong>modelcreator/plates</strong> le cinque configurazioni 1U1L, 1U2L, 2U1L, 2U2L e XL:</p>
 <div class="fig"><img src="img_011.jpg"><p class="cap">Cartelle di configurazione in modelcreator/plates</p></div>
 
-<div class="nb">Dopo l'installazione è possibile procedere con i protocolli RotoClick in Exocad.<br><br><span class="pl" onclick="go('artiregister')">&#8594; Vai alla guida ARTIREGISTER</span></div>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Panoramica</span><span class="pl" onclick="go('artiregister')">&#8594; ARTIREGISTER</span></div>
 </div>
 <div class="pg" id="p-install-en"><p class="pr">Rev.1 — 19/06/2026</p><h1>Exocad Libraries</h1><p class="ps">Installing the RotoClick libraries in Exocad</p>
 <h2>Download the library</h2>
@@ -219,7 +223,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p>As well as the five configurations 1U1L, 1U2L, 2U1L, 2U2L and XL in the <strong>modelcreator/plates</strong> folder:</p>
 <div class="fig"><img src="img_016.jpg"><p class="cap">Configuration folders under modelcreator/plates</p></div>
 
-<div class="nb">Once installation is complete, you can proceed with the RotoClick protocols in Exocad.<br><br><span class="pl" onclick="go('artiregister')">&#8594; Continue to the ARTIREGISTER Guide</span></div>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Overview</span><span class="pl" onclick="go('artiregister')">&#8594; ARTIREGISTER</span></div>
 </div>
 
 <div class="pg" id="p-keyclinic-de"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Clinic</h1><p class="ps">Protokoll zur Digitalisierung des Artex-Gesichtsbogens mittels Intraoralscanner</p>
@@ -267,7 +271,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 </ul>
 
 <div class="dv"></div>
-<p><span class="pl" onclick="go('artiregister')">&#8594; Weiter zur ARTIREGISTER Anleitung</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Übersicht</span><span class="pl" onclick="go('artiregister')">&#8594; ARTIREGISTER</span></div>
 </div>
 <div class="pg" id="p-keyclinic-it"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Clinic</h1><p class="ps">Protocollo per la digitalizzazione dell'arco facciale Artex tramite scanner intraorale</p>
 <h2>Introduzione</h2>
@@ -314,7 +318,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 </ul>
 
 <div class="dv"></div>
-<p><span class="pl" onclick="go('artiregister')">&#8594; Vai alla guida ARTIREGISTER</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Panoramica</span><span class="pl" onclick="go('artiregister')">&#8594; ARTIREGISTER</span></div>
 </div>
 <div class="pg" id="p-keyclinic-en"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Clinic</h1><p class="ps">Protocol for digitizing the Artex facebow using an intraoral scanner</p>
 <h2>Introduction</h2>
@@ -361,7 +365,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 </ul>
 
 <div class="dv"></div>
-<p><span class="pl" onclick="go('artiregister')">&#8594; Continue to the ARTIREGISTER Guide</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Overview</span><span class="pl" onclick="go('artiregister')">&#8594; ARTIREGISTER</span></div>
 </div>
 
 <div class="pg" id="p-artiregister-de"><p class="pr">Rev.1 — 18/06/2026</p><h1>ARTIREGISTER</h1><p class="ps">Ausrichtung der Key Clinic Registrierung in Exocad</p>
@@ -439,7 +443,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p><strong>Mögliche Ursachen:</strong> Scanartefakte, Registriergabel nur teilweise erfasst, Tracking-Verlust, Scandaten nicht bereinigt. <strong>Lösung:</strong> Registrierung erneut durchführen, Meshes überprüfen, Scandaten zuschneiden, Funktion „Bereiche ausschließen" verwenden oder Scan neu aufnehmen.</p>
 
 <div class="dv"></div>
-<p><span class="pl" onclick="go('keylab')">&#8594; Weiter zur Key Lab Anleitung</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Übersicht</span><span class="pl" onclick="go('keylab')">&#8594; Key Lab</span></div>
 </div>
 <div class="pg" id="p-artiregister-it"><p class="pr">Rev.1 — 18/06/2026</p><h1>ARTIREGISTER</h1><p class="ps">Allineamento della registrazione Key Clinic in Exocad</p>
 <h2>Introduzione</h2>
@@ -516,7 +520,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p><strong>Possibili cause:</strong> artefatti di scansione, forchetta acquisita solo parzialmente, perdita di tracking, dati di scansione non puliti. <strong>Soluzione:</strong> ripetere la registrazione, verificare le mesh originali, ritagliare e pulire i dati di scansione, usare la funzione "Escludi aree" o ripetere la scansione.</p>
 
 <div class="dv"></div>
-<p><span class="pl" onclick="go('keylab')">&#8594; Vai alla guida Key Lab</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Panoramica</span><span class="pl" onclick="go('keylab')">&#8594; Key Lab</span></div>
 </div>
 <div class="pg" id="p-artiregister-en"><p class="pr">Rev.1 — 18/06/2026</p><h1>ARTIREGISTER</h1><p class="ps">Aligning the Key Clinic registration in Exocad</p>
 <h2>Introduction</h2>
@@ -593,7 +597,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p><strong>Possible causes:</strong> scan artifacts, registration fork only partially captured, tracking loss during acquisition, scan data not sufficiently cleaned. <strong>Solution:</strong> redo the registration, check the original meshes, trim and clean the scan data, use the "Exclude areas" function, or rescan if necessary.</p>
 
 <div class="dv"></div>
-<p><span class="pl" onclick="go('keylab')">&#8594; Continue to the Key Lab Guide</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Overview</span><span class="pl" onclick="go('keylab')">&#8594; Key Lab</span></div>
 </div>
 
 <div class="pg" id="p-keylab-de"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Lab</h1><p class="ps">Übertragung digitaler Modelle in den physischen Artikulator</p>
@@ -661,7 +665,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <a class="dl" href="https://youtu.be/I4vS7ljNdaY" target="_blank">&#9658; Video: Montage im Artikulator</a>
 
 <div class="dv"></div>
-<div class="nb"><span class="pl" onclick="go('kalibrierung')">&#8594; Weiter zur Kalibrierung</span> — bei nicht zufriedenstellender Genauigkeit oder für Nicht-ARTEX-Artikulatoren.</div>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Übersicht</span><span class="pl" onclick="go('kalibrierung')">&#8594; Kalibrierung</span></div>
 </div>
 <div class="pg" id="p-keylab-it"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Lab</h1><p class="ps">Trasferimento dei modelli digitali nell'articolatore fisico</p>
 <h2>Introduzione</h2>
@@ -728,7 +732,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <a class="dl" href="https://youtu.be/I4vS7ljNdaY" target="_blank">&#9658; Video: Montaggio nell'articolatore</a>
 
 <div class="dv"></div>
-<div class="nb"><span class="pl" onclick="go('kalibrierung')">&#8594; Vai alla Calibrazione</span> — in caso di precisione non soddisfacente o per articolatori non-ARTEX.</div>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Panoramica</span><span class="pl" onclick="go('kalibrierung')">&#8594; Calibrazione</span></div>
 </div>
 <div class="pg" id="p-keylab-en"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Lab</h1><p class="ps">Transferring digital models into the physical articulator</p>
 <h2>Introduction</h2>
@@ -795,7 +799,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <a class="dl" href="https://youtu.be/I4vS7ljNdaY" target="_blank">&#9658; Video: Mounting in the articulator</a>
 
 <div class="dv"></div>
-<div class="nb"><span class="pl" onclick="go('kalibrierung')">&#8594; Continue to Calibration</span> — if accuracy is unsatisfactory or for non-ARTEX articulators.</div>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Overview</span><span class="pl" onclick="go('kalibrierung')">&#8594; Calibration</span></div>
 </div>
 
 <div class="pg" id="p-kalibrierung-de"><p class="pr">Rev.1 — 25/06/2026</p><h1>Kalibrierung</h1><p class="ps">Anpassung an andere Artikulatoren und Genauigkeitskontrolle</p>
@@ -824,7 +828,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p>Kalibrierkörper entnehmen — die Konterplatten verbleiben dauerhaft am Artikulator und definieren den kalibrierten Aufnahmeraum.</p>
 <div class="nb"><strong>Klinischer Hinweis:</strong> Beim Nicht-ARTEX-Artikulator kann nur die Okklusion übertragen werden. Die Gesichtsbogenregistrierung bleibt an die ARTEX-Geometrie gebunden.<br><br>Durch diese Methode wird vollständige Kompatibilität zwischen ARTEX- und Nicht-ARTEX-Artikulatoren im selben Labor erreicht.</div>
 <div class="dv"></div>
-<p><span class="pl" onclick="go('zubehoer')">&#8594; Zubehör &amp; Downloads</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Übersicht</span><span class="pl" onclick="go('zubehoer')">&#8594; Zubehör &amp; Downloads</span></div>
 </div>
 <div class="pg" id="p-kalibrierung-it"><p class="pr">Rev.1 — 25/06/2026</p><h1>Calibrazione</h1><p class="ps">Adattamento ad altri articolatori e controllo della precisione</p>
 <h2>Introduzione</h2>
@@ -852,7 +856,7 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p>Rimuovere il corpo di calibrazione — le controplacche rimangono fissate permanentemente all'articolatore e definiscono lo spazio di alloggiamento calibrato.</p>
 <div class="nb"><strong>Nota clinica:</strong> Con un articolatore non-ARTEX viene trasferita esclusivamente l'occlusione. La registrazione dell'arco facciale rimane legata alla geometria ARTEX.<br><br>Questo metodo garantisce piena compatibilità tra articolatori ARTEX e non-ARTEX nello stesso laboratorio.</div>
 <div class="dv"></div>
-<p><span class="pl" onclick="go('zubehoer')">&#8594; Accessori &amp; Download</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Panoramica</span><span class="pl" onclick="go('zubehoer')">&#8594; Accessori &amp; Download</span></div>
 </div>
 <div class="pg" id="p-kalibrierung-en"><p class="pr">Rev.1 — 25/06/2026</p><h1>Calibration</h1><p class="ps">Adapting to other articulators and accuracy control</p>
 <h2>Introduction</h2>
@@ -880,12 +884,12 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 <p>Remove the calibration body — the counter-plates remain permanently attached to the articulator and define the calibrated seating space.</p>
 <div class="nb"><strong>Clinical note:</strong> With a non-ARTEX articulator, only the occlusion can be transferred. Facebow registration remains tied to ARTEX geometry.<br><br>This method achieves full compatibility between ARTEX and non-ARTEX articulators within the same laboratory.</div>
 <div class="dv"></div>
-<p><span class="pl" onclick="go('zubehoer')">&#8594; Accessories &amp; Downloads</span></p>
+<div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Overview</span><span class="pl" onclick="go('zubehoer')">&#8594; Accessories &amp; Downloads</span></div>
 </div>
 
-<div class="pg" id="p-zubehoer-de"><p class="pr">Zubehör</p><h1>Zubehör &amp; Downloads</h1><p class="ps">Alle Dateien zum Herunterladen</p><h2>Exocad Bibliotheken</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Kalibrierung</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Extractor</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a></div>
+<div class="pg" id="p-zubehoer-de" data-back="home"><p class="pr">Zubehör</p><h1>Zubehör &amp; Downloads</h1><p class="ps">Alle Dateien zum Herunterladen</p><h2>Exocad Bibliotheken</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Kalibrierung</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Extractor</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a><div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Übersicht</span></div></div>
 
-<div class="pg" id="p-zubehoer-it"><p class="pr">Accessori</p><h1>Accessori &amp; Download</h1><p class="ps">Tutti i file disponibili per il download</p><h2>Librerie Exocad</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Calibrazione</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Estrattore</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a></div>
+<div class="pg" id="p-zubehoer-it"><p class="pr">Accessori</p><h1>Accessori &amp; Download</h1><p class="ps">Tutti i file disponibili per il download</p><h2>Librerie Exocad</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Calibrazione</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Estrattore</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a><div class="pg-nav"><span class="pg-nav-back" onclick="go('home')">&#8592; Panoramica</span></div></div>
 
 <div class="pg" id="p-zubehoer-en"><p class="pr">Accessories</p><h1>Accessories &amp; Downloads</h1><p class="ps">All files available for download</p><h2>Exocad Libraries</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Calibration</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Extractor</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a></div>
 
