@@ -65,6 +65,27 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 .fig2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
 .fig2 .fig{margin:0}
 @media (max-width:680px){.fig2{grid-template-columns:1fr}}
+
+/* ── MOBILE ── */
+#mob-bar{display:none}
+@media(max-width:768px){
+  #app{flex-direction:column}
+  #sb{width:100%;height:auto;min-height:unset;position:fixed;top:0;left:0;right:0;z-index:500;overflow:hidden;transition:height .3s ease}
+  #sb.collapsed{height:52px}
+  #sb.expanded{height:100vh;overflow-y:auto}
+  #mob-bar{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;background:var(--g1);border-bottom:1px solid var(--g2);flex-shrink:0}
+  #mob-bar img{height:28px}
+  #mob-toggle{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:6px}
+  #mob-toggle span{display:block;width:22px;height:2px;background:var(--black);border-radius:2px;transition:all .25s}
+  #sb.expanded #mob-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  #sb.expanded #mob-toggle span:nth-child(2){opacity:0}
+  #sb.expanded #mob-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .sl{display:none}
+  .slg{flex-shrink:0}
+  #ct{padding:80px 20px 32px;max-width:100%}
+  .hg{grid-template-columns:1fr}
+  .fig2{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -80,7 +101,8 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 </div>
 
 <div id="app">
-  <div id="sb">
+  <div id="sb" class="collapsed">
+  <div id="mob-bar"><img src="img_000.png" alt="RotoClick"><button id="mob-toggle" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button></div>
     <div class="sl"><img src="img_001.png" alt="RotoClick"></div>
     <div class="slg">
       <button class="lbtn active" onclick="setLang('de',this)">DE</button>
@@ -902,8 +924,22 @@ function go(p){
     if(b.getAttribute("onclick")&&b.getAttribute("onclick").includes("'"+p+"'"))b.classList.add("active");
   });
   window.scrollTo(0,0);
+closeMenuOnNav();
 }
 document.addEventListener("DOMContentLoaded",()=>go("home"));
+
+function toggleMenu(){
+  var sb=document.getElementById('sb');
+  sb.classList.toggle('collapsed');
+  sb.classList.toggle('expanded');
+}
+function closeMenuOnNav(){
+  if(window.innerWidth<=768){
+    var sb=document.getElementById('sb');
+    sb.classList.add('collapsed');
+    sb.classList.remove('expanded');
+  }
+}
 </script>
 </body>
 </html>
