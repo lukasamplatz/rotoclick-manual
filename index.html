@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RotoClick – Online Handbuch</title>
+<style>
+:root{--black:#0a0a0a;--white:#fff;--g1:#f5f5f5;--g2:#e8e8e8;--g4:#9a9a9a;--g6:#5a5a5a;--sw:280px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--white);color:var(--black);min-height:100vh;display:flex;flex-direction:column}
+#ls{position:fixed;inset:0;background:var(--white);display:flex;align-items:center;justify-content:center;z-index:1000;flex-direction:column;gap:40px}
+#ls img{width:240px}
+.lb{display:flex;flex-direction:column;gap:14px;width:300px}
+.lb input{padding:13px 16px;border:1.5px solid var(--g2);font-size:15px;outline:none;background:var(--g1)}
+.lb input:focus{border-color:var(--black)}
+.lb button{padding:13px;background:var(--black);color:var(--white);border:none;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.lb button:hover{opacity:.75}
+.le{color:#c0392b;font-size:13px;text-align:center;display:none}
+.ll{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--g4);text-align:center}
+#app{display:none;flex-direction:row;min-height:100vh}
+#sb{width:var(--sw);min-height:100vh;background:var(--g1);border-right:1px solid var(--g2);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sl{padding:24px 20px 18px;border-bottom:1px solid var(--g2)}
+.sl img{width:130px}
+.slg{display:flex;border-bottom:1px solid var(--g2)}
+.lbtn{flex:1;padding:9px;background:none;border:none;border-right:1px solid var(--g2);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--g4);cursor:pointer}
+.lbtn:last-child{border-right:none}
+.lbtn.active{background:var(--black);color:var(--white)}
+nav{padding:12px 0;flex:1}
+.nsl{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--g4);padding:12px 20px 5px}
+.ni{display:block;width:100%;text-align:left;background:none;border:none;padding:9px 20px;font-size:13px;color:var(--g6);cursor:pointer;border-left:3px solid transparent}
+.ni:hover{color:var(--black);background:var(--g2)}
+.ni.active{color:var(--black);border-left-color:var(--black);background:var(--white);font-weight:600}
+.ns{padding:8px 20px 8px 34px;font-size:12px}
+#ct{flex:1;padding:48px 56px;max-width:780px}
+.pg{display:none}
+.pg.active{display:block}
+.pr{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--g4);margin-bottom:18px}
+h1{font-size:28px;font-weight:700;margin-bottom:6px}
+.ps{font-size:14px;color:var(--g6);margin-bottom:32px}
+h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--g4);margin:40px 0 16px;border-bottom:1px solid var(--g2);padding-bottom:8px}
+h3{font-size:15px;font-weight:600;margin:22px 0 10px;color:var(--black)}
+p{font-size:14px;line-height:1.75;color:var(--g6);margin-bottom:12px}
+ul{margin:0 0 14px;padding-left:0;list-style:none}
+ul li{font-size:14px;line-height:1.7;color:var(--g6);padding:3px 0 3px 18px;position:relative}
+ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
+.cl{list-style:none;margin:0 0 14px;padding:0}
+.cl li{font-size:14px;line-height:1.7;color:var(--g6);padding:3px 0 3px 26px;position:relative}
+.cl li::before{content:'\2610';position:absolute;left:0;color:var(--g4)}
+.dl{display:inline-flex;align-items:center;background:var(--black);color:var(--white);text-decoration:none;padding:10px 16px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:6px 0 20px}
+.dl:hover{opacity:.75}
+.nb{background:var(--g1);border-left:3px solid var(--black);padding:12px 16px;margin:16px 0;font-size:13px;color:var(--g6);line-height:1.7}
+.nb strong{color:var(--black)}
+.phase-tag{display:inline-block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;background:var(--black);color:var(--white);padding:3px 9px;margin-bottom:6px}
+.pl{color:var(--black);font-size:13px;font-weight:600;border-bottom:1.5px solid var(--black);cursor:pointer}
+.dv{height:1px;background:var(--g2);margin:32px 0}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:32px}
+.hc{background:var(--g1);padding:22px 18px;cursor:pointer;transition:background .15s;border:1px solid var(--g2)}
+.hc:hover{background:var(--g2)}
+.hn{font-size:10px;letter-spacing:.2em;color:var(--g4);margin-bottom:6px}
+.hc h3{font-size:13px;margin:0 0 4px}
+.hc p{font-size:12px;margin:0;color:var(--g6)}
+.fig{margin:18px 0}
+.fig img{width:100%;display:block;border:1px solid var(--g2);border-radius:2px}
+.fig .cap{font-size:12px;color:var(--g4);margin-top:6px;text-align:center;font-style:italic}
+.fig2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.fig2 .fig{margin:0}
+@media (max-width:680px){.fig2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="ls">
+  <img src="imgs/img_000.png" alt="RotoClick">
+  <div class="lb">
+    <p class="ll">Online Manual — Access</p>
+    <input type="password" id="pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()">
+    <button onclick="login()">Confirm access</button>
+    <p class="le" id="le">Incorrect password.</p>
+  </div>
+</div>
+
+<div id="app">
+  <div id="sb">
+    <div class="sl"><img src="imgs/img_001.png" alt="RotoClick"></div>
+    <div class="slg">
+      <button class="lbtn active" onclick="setLang('de',this)">DE</button>
+      <button class="lbtn" onclick="setLang('it',this)">IT</button>
+      <button class="lbtn" onclick="setLang('en',this)">EN</button>
+    </div>
+    <nav id="nd">
+      <div class="nsl">Inhalt</div>
+      <button class="ni" onclick="go('home')">Übersicht</button>
+      <div class="nsl">Exocad</div>
+      <button class="ni ns" onclick="go('install')">Bibliotheken installieren</button>
+      <div class="nsl">Key Clinic</div>
+      <button class="ni ns" onclick="go('keyclinic')">Key Clinic Anleitung</button>
+      <button class="ni ns" onclick="go('artiregister')">ARTIREGISTER</button>
+      <div class="nsl">Key Lab</div>
+      <button class="ni ns" onclick="go('keylab')">Key Lab Anleitung</button>
+      <button class="ni ns" onclick="go('kalibrierung')">Kalibrierung</button>
+      <button class="ni ns" onclick="go('zubehoer')">Zubehör &amp; Downloads</button>
+    </nav>
+    <nav id="ni" style="display:none">
+      <div class="nsl">Contenuto</div>
+      <button class="ni" onclick="go('home')">Panoramica</button>
+      <div class="nsl">Exocad</div>
+      <button class="ni ns" onclick="go('install')">Installazione librerie</button>
+      <div class="nsl">Key Clinic</div>
+      <button class="ni ns" onclick="go('keyclinic')">Guida Key Clinic</button>
+      <button class="ni ns" onclick="go('artiregister')">ARTIREGISTER</button>
+      <div class="nsl">Key Lab</div>
+      <button class="ni ns" onclick="go('keylab')">Guida Key Lab</button>
+      <button class="ni ns" onclick="go('kalibrierung')">Calibrazione</button>
+      <button class="ni ns" onclick="go('zubehoer')">Accessori &amp; Download</button>
+    </nav>
+    <nav id="nn" style="display:none">
+      <div class="nsl">Contents</div>
+      <button class="ni" onclick="go('home')">Overview</button>
+      <div class="nsl">Exocad</div>
+      <button class="ni ns" onclick="go('install')">Installing the libraries</button>
+      <div class="nsl">Key Clinic</div>
+      <button class="ni ns" onclick="go('keyclinic')">Key Clinic Guide</button>
+      <button class="ni ns" onclick="go('artiregister')">ARTIREGISTER</button>
+      <div class="nsl">Key Lab</div>
+      <button class="ni ns" onclick="go('keylab')">Key Lab Guide</button>
+      <button class="ni ns" onclick="go('kalibrierung')">Calibration</button>
+      <button class="ni ns" onclick="go('zubehoer')">Accessories &amp; Downloads</button>
+    </nav>
+  </div>
+
+  <div id="ct">
+
+<div class="pg" id="p-home-de"><p class="pr">RotoClick Model System</p><h1>Online Handbuch</h1><p class="ps">Alle Anleitungen für das RotoClick System — von der Bibliotheksinstallation bis zur Kalibrierung.</p><div class="hg"><div class="hc" onclick="go('install')"><div class="hn">01</div><h3>Exocad Bibliotheken</h3><p>Installation der RotoClick-Bibliotheken</p></div><div class="hc" onclick="go('keyclinic')"><div class="hn">02</div><h3>Key Clinic</h3><p>Digitalisierung des Gesichtsbogens</p></div><div class="hc" onclick="go('artiregister')"><div class="hn">03</div><h3>ARTIREGISTER</h3><p>Ausrichtung der Scans in Exocad</p></div><div class="hc" onclick="go('keylab')"><div class="hn">04</div><h3>Key Lab</h3><p>Übertragung der Modelle in den Artikulator</p></div><div class="hc" onclick="go('kalibrierung')"><div class="hn">05</div><h3>Kalibrierung</h3><p>Anpassung an andere Artikulatoren</p></div><div class="hc" onclick="go('zubehoer')"><div class="hn">06</div><h3>Zubehör &amp; Downloads</h3><p>Calibrator, Extractor und weitere Dateien</p></div></div></div>
+
+<div class="pg" id="p-home-it"><p class="pr">RotoClick Model System</p><h1>Manuale Online</h1><p class="ps">Tutte le istruzioni per il sistema RotoClick — dall'installazione della libreria alla calibrazione.</p><div class="hg"><div class="hc" onclick="go('install')"><div class="hn">01</div><h3>Librerie Exocad</h3><p>Installazione delle librerie RotoClick</p></div><div class="hc" onclick="go('keyclinic')"><div class="hn">02</div><h3>Key Clinic</h3><p>Digitalizzazione dell'arco facciale</p></div><div class="hc" onclick="go('artiregister')"><div class="hn">03</div><h3>ARTIREGISTER</h3><p>Allineamento delle scansioni in Exocad</p></div><div class="hc" onclick="go('keylab')"><div class="hn">04</div><h3>Key Lab</h3><p>Trasferimento dei modelli nell'articolatore</p></div><div class="hc" onclick="go('kalibrierung')"><div class="hn">05</div><h3>Calibrazione</h3><p>Adattamento ad altri articolatori</p></div><div class="hc" onclick="go('zubehoer')"><div class="hn">06</div><h3>Accessori &amp; Download</h3><p>Calibratore, estrattore e altri file</p></div></div></div>
+
+<div class="pg" id="p-home-en"><p class="pr">RotoClick Model System</p><h1>Online Manual</h1><p class="ps">All instructions for the RotoClick System — from library installation to calibration.</p><div class="hg"><div class="hc" onclick="go('install')"><div class="hn">01</div><h3>Exocad Libraries</h3><p>Installing the RotoClick libraries</p></div><div class="hc" onclick="go('keyclinic')"><div class="hn">02</div><h3>Key Clinic</h3><p>Digitizing the facebow registration</p></div><div class="hc" onclick="go('artiregister')"><div class="hn">03</div><h3>ARTIREGISTER</h3><p>Aligning the scans in Exocad</p></div><div class="hc" onclick="go('keylab')"><div class="hn">04</div><h3>Key Lab</h3><p>Transferring models into the articulator</p></div><div class="hc" onclick="go('kalibrierung')"><div class="hn">05</div><h3>Calibration</h3><p>Adapting to other articulators</p></div><div class="hc" onclick="go('zubehoer')"><div class="hn">06</div><h3>Accessories &amp; Downloads</h3><p>Calibrator, extractor and other files</p></div></div></div>
+
+<div class="pg" id="p-install-de"><p class="pr">Rev.1 — 19/06/2026</p><h1>Exocad Bibliotheken</h1><p class="ps">Installation der RotoClick-Bibliotheken in Exocad</p>
+<h2>Bibliothek herunterladen</h2>
+<p>Laden Sie das Paket <strong>library_V6.zip</strong> herunter und entpacken Sie den Ordner <strong>library</strong> aus der ZIP-Datei.</p>
+<a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip herunterladen</a>
+
+<h2>Installationspfad öffnen</h2>
+<p>Öffnen Sie den Pfad der Exocad-Bibliothek über das Exocad-Symbol, dann das Exocad-Hauptverzeichnis und den Ordner <strong>„DentalCADApp"</strong>.</p>
+<div class="fig"><img src="imgs/img_002.jpg"><p class="cap">Exocad-Pfad über Rechtsklick &#8594; „Apri percorso file" öffnen</p></div>
+
+<h2>Library-Ordner kopieren</h2>
+<p>Kopieren Sie den soeben heruntergeladenen Ordner <strong>library</strong> in das DentalCADApp-Verzeichnis.</p>
+<div class="fig"><img src="imgs/img_003.jpg"><p class="cap">Ordner „library" per Drag &amp; Drop oder Copy/Paste einfügen</p></div>
+
+<h2>Unterordner überprüfen</h2>
+<p>Überprüfen Sie, ob die folgenden Unterordner korrekt vorhanden sind: <strong>artiregister</strong> mit den Key-Artex-Varianten BIG / SMALL / STANDARD, sowie <strong>modelcreator/attachments</strong> mit den Ordnern rotoclick_DRAIN_HOLES und rotoclick_KEYLAB_PLUS.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_004.jpg"><p class="cap">Ordner „artiregister" mit den Höhenvarianten</p></div><div class="fig"><img src="imgs/img_005.jpg"><p class="cap">Ordner „attachments" mit den Modell-Attachments</p></div></div>
+<p>Sowie im Ordner <strong>modelcreator/plates</strong> die fünf Konfigurationen 1U1L, 1U2L, 2U1L, 2U2L und XL:</p>
+<div class="fig"><img src="imgs/img_006.jpg"><p class="cap">Konfigurationsordner unter modelcreator/plates</p></div>
+
+<div class="nb">Nach erfolgreicher Installation können Sie mit den RotoClick-Protokollen in Exocad fortfahren.<br><br><span class="pl" onclick="go('artiregister')">&#8594; Weiter zur ARTIREGISTER Anleitung</span></div>
+</div>
+<div class="pg" id="p-install-it"><p class="pr">Rev.1 — 19/06/2026</p><h1>Librerie Exocad</h1><p class="ps">Installazione delle librerie RotoClick in Exocad</p>
+<h2>Download della libreria</h2>
+<p>Scaricare il pacchetto <strong>library_V6.zip</strong> ed estrarre la cartella <strong>library</strong> dall'archivio ZIP.</p>
+<a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; Scarica library_V6.zip</a>
+
+<h2>Apertura del percorso di installazione</h2>
+<p>Aprire il percorso della libreria Exocad tramite l'icona di Exocad, quindi la directory principale di Exocad e la cartella <strong>"DentalCADApp"</strong>.</p>
+<div class="fig"><img src="imgs/img_007.jpg"><p class="cap">Aprire il percorso file tramite tasto destro &#8594; "Apri percorso file"</p></div>
+
+<h2>Copia della cartella library</h2>
+<p>Copiare la cartella <strong>library</strong> appena scaricata nella directory DentalCADApp.</p>
+<div class="fig"><img src="imgs/img_008.jpg"><p class="cap">Incollare la cartella "library" tramite trascinamento o copia/incolla</p></div>
+
+<h2>Verifica delle sottocartelle</h2>
+<p>Verificare che le seguenti sottocartelle siano presenti correttamente: <strong>artiregister</strong> con le varianti Key Artex BIG / SMALL / STANDARD, e <strong>modelcreator/attachments</strong> con le cartelle rotoclick_DRAIN_HOLES e rotoclick_KEYLAB_PLUS.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_009.jpg"><p class="cap">Cartella "artiregister" con le varianti di altezza</p></div><div class="fig"><img src="imgs/img_010.jpg"><p class="cap">Cartella "attachments" con gli attachment del modello</p></div></div>
+<p>E nella cartella <strong>modelcreator/plates</strong> le cinque configurazioni 1U1L, 1U2L, 2U1L, 2U2L e XL:</p>
+<div class="fig"><img src="imgs/img_011.jpg"><p class="cap">Cartelle di configurazione in modelcreator/plates</p></div>
+
+<div class="nb">Dopo l'installazione è possibile procedere con i protocolli RotoClick in Exocad.<br><br><span class="pl" onclick="go('artiregister')">&#8594; Vai alla guida ARTIREGISTER</span></div>
+</div>
+<div class="pg" id="p-install-en"><p class="pr">Rev.1 — 19/06/2026</p><h1>Exocad Libraries</h1><p class="ps">Installing the RotoClick libraries in Exocad</p>
+<h2>Download the library</h2>
+<p>Download the package <strong>library_V6.zip</strong> and extract the <strong>library</strong> folder from the ZIP file.</p>
+<a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; Download library_V6.zip</a>
+
+<h2>Open the installation path</h2>
+<p>Open the Exocad library path via the Exocad icon, then the Exocad main directory and the <strong>"DentalCADApp"</strong> folder.</p>
+<div class="fig"><img src="imgs/img_012.jpg"><p class="cap">Open the file path via right-click &#8594; "Open file location"</p></div>
+
+<h2>Copy the library folder</h2>
+<p>Copy the newly downloaded <strong>library</strong> folder into the DentalCADApp directory.</p>
+<div class="fig"><img src="imgs/img_013.jpg"><p class="cap">Paste the "library" folder via drag &amp; drop or copy/paste</p></div>
+
+<h2>Verify subfolders</h2>
+<p>Verify that the following subfolders are present correctly: <strong>artiregister</strong> with the Key Artex BIG / SMALL / STANDARD variants, and <strong>modelcreator/attachments</strong> with the rotoclick_DRAIN_HOLES and rotoclick_KEYLAB_PLUS folders.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_014.jpg"><p class="cap">"artiregister" folder with the height variants</p></div><div class="fig"><img src="imgs/img_015.jpg"><p class="cap">"attachments" folder with the model attachments</p></div></div>
+<p>As well as the five configurations 1U1L, 1U2L, 2U1L, 2U2L and XL in the <strong>modelcreator/plates</strong> folder:</p>
+<div class="fig"><img src="imgs/img_016.jpg"><p class="cap">Configuration folders under modelcreator/plates</p></div>
+
+<div class="nb">Once installation is complete, you can proceed with the RotoClick protocols in Exocad.<br><br><span class="pl" onclick="go('artiregister')">&#8594; Continue to the ARTIREGISTER Guide</span></div>
+</div>
+
+<div class="pg" id="p-keyclinic-de"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Clinic</h1><p class="ps">Protokoll zur Digitalisierung des Artex-Gesichtsbogens mittels Intraoralscanner</p>
+<h2>Einleitung</h2>
+<p>Das RotoClick Key Clinic-System ermöglicht die Digitalisierung der mit dem Artex-Gesichtsbogen erfassten Registrierung und die Übertragung der räumlichen Position des Oberkiefers in digitaler Form an das Dentallabor. Das Protokoll umfasst drei getrennte Phasen: Erfassung der digitalen intraoralen Scans, analoge Registrierung mit dem Artex-Gesichtsbogen, und Digitalisierung der Registrierung mit RotoClick Key Clinic.</p>
+<p>Auf diese Weise können die mit dem Gesichtsbogen erfassten Informationen digital dem Labor übermittelt werden, ohne den Transferstand oder andere analoge Komponenten versenden zu müssen.</p>
+
+<h2>Benötigte Materialien</h2>
+<ul><li>Intraoral-Scanner</li><li>Artex-Gesichtsbogen und Artex-Registriergabel</li><li>Opakes Fixiersilikon – Futar D</li><li>Splitex – Übertragungstisch</li><li>RotoClick Key Clinic Marker</li></ul>
+<div class="fig2"><div class="fig"><img src="imgs/img_017.jpg"><p class="cap">Intraoral-Scanner</p></div><div class="fig"><img src="imgs/img_018.jpg"><p class="cap">Futar D Fixiersilikon-Set</p></div></div>
+<div class="fig"><img src="imgs/img_019.jpg"><p class="cap">Splitex-Übertragungstisch</p></div>
+
+<h2>Phase 1 – Erfassung der digitalen Abdrücke</h2>
+<div class="phase-tag">Phase 1</div>
+<p>Führen Sie die Intraoral-Scans des Patienten wie gewohnt durch und erfassen Sie Oberkiefer, Unterkiefer, Okklusionsregistrierung sowie gegebenenfalls zusätzliche Scans (Scanbody, präoperative Scans). Speichern Sie das Projekt nach Abschluss.</p>
+
+<h2>Phase 2 – Registrierung des Gesichtsbogens</h2>
+<div class="phase-tag">Phase 2</div>
+<p>Bereiten Sie die Registriergabel gemäß dem üblichen klinischen Protokoll vor. Positionieren Sie die Gabel am Oberkiefer, bringen Sie den Artex-Gesichtsbogen an und registrieren Sie die Position des Oberkiefers. Arretieren Sie das 3D-Gelenk und prüfen Sie vor dem Entfernen, dass alle Komponenten korrekt festgezogen sind.</p>
+<a class="dl" href="https://youtu.be/fdPK2xoHfOo?si=UeGXkbGcaDnH9btC" target="_blank">&#9658; Video: Artex Facebow Registrierung</a>
+
+<h2>Phase 3 – Digitalisierung mit RotoClick Key Clinic</h2>
+<div class="phase-tag">Phase 3</div>
+<h3>3.1 / 3.2 Aufnahme der Gabel im Mund (empfohlen)</h3>
+<p>Scannen Sie bei noch im Mund positionierter Gabel den vestibulären Teil der Frontzähne und die sichtbare Oberfläche der Gabel. Wichtig: Der Scan muss sowohl Zähne als auch Gabel umfassen, um einen korrekten Überlappungsbereich für die spätere digitale Ausrichtung zu schaffen.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_020.jpg"><p class="cap">Scan der Frontzähne mit positionierter Gabel</p></div><div class="fig"><img src="imgs/img_021.jpg"><p class="cap">Erfassung der Gabeloberfläche</p></div></div>
+
+<h3>3.3 Übertragung auf Key Clinic</h3>
+<p>Entfernen Sie den Gesichtsbogen vom Patienten. Übertragen Sie den 3D-Gelenksupport auf den Splitex-Übertragungstisch und positionieren Sie den Key Clinic Marker mit der angemessenen Höhe auf der magnetischen Aufnahme — so, dass die Distanz zur Gabel so gering wie möglich ist, ohne dass sich die beiden berühren. Erstellen Sie mit Futar D mindestens 2 Verbindungen zwischen Gabel und Marker.</p>
+<div class="fig"><img src="imgs/img_022.jpg"><p class="cap">Digitalisiertes Ergebnis: Gabel mit Marker-Verbindung</p></div>
+<div class="nb"><strong>Wichtig:</strong> Dem Labor die verwendete Markervariante mitteilen.</div>
+<div class="fig"><img src="imgs/img_023.jpg"><p class="cap">Markervarianten: Small / Standard / Big</p></div>
+
+<h3>3.4 Aufnahme des Key Clinic</h3>
+<p>Beginnen Sie an der Oberfläche der Gabel, erfassen Sie alle Vertiefungen und setzen Sie den Scan entlang der Gabel, über die Verbindungen bis zum RotoClick Key Clinic-Gerät fort. Für eine korrekte geometrische Erkennung sollten mindestens 30&nbsp;% der Key-Clinic-Oberfläche erfasst werden.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_024.jpg"><p class="cap">Verbindung zwischen Gabel und Key Clinic</p></div><div class="fig"><img src="imgs/img_025.jpg"><p class="cap">Scan der Key-Clinic-Oberfläche</p></div></div>
+
+<h2>Abschlusskontrolle</h2>
+<ul class="cl">
+<li>Gabel vollständig erfasst</li>
+<li>Verbindung zwischen Gabel und Key Clinic sichtbar und durchgängig</li>
+<li>Mindestens ein Drittel der Oberfläche des Key-Clinic-Markers erfasst</li>
+<li>Keine Trackingfehler oder fehlenden Bereiche vorhanden</li>
+<li>Markerhöhe (small/standard/big) in den Projektnotizen angegeben</li>
+</ul>
+
+<div class="dv"></div>
+<p><span class="pl" onclick="go('artiregister')">&#8594; Weiter zur ARTIREGISTER Anleitung</span></p>
+</div>
+<div class="pg" id="p-keyclinic-it"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Clinic</h1><p class="ps">Protocollo per la digitalizzazione dell'arco facciale Artex tramite scanner intraorale</p>
+<h2>Introduzione</h2>
+<p>Il sistema RotoClick Key Clinic consente la digitalizzazione della registrazione acquisita con l'arco facciale Artex e il trasferimento della posizione spaziale del mascellare superiore in forma digitale al laboratorio dentale. Il protocollo comprende tre fasi separate: acquisizione delle scansioni intraorali digitali, registrazione analogica con l'arco facciale Artex, e digitalizzazione della registrazione con RotoClick Key Clinic.</p>
+<p>In questo modo le informazioni acquisite con l'arco facciale possono essere trasmesse digitalmente al laboratorio, senza dover spedire il supporto di trasferimento o altri componenti analogici.</p>
+
+<h2>Materiali necessari</h2>
+<ul><li>Scanner intraorale</li><li>Arco facciale Artex e forchetta di registrazione Artex</li><li>Silicone opaco di fissaggio – Futar D</li><li>Splitex – tavolo di trasferimento</li><li>Marker RotoClick Key Clinic</li></ul>
+<div class="fig2"><div class="fig"><img src="imgs/img_026.jpg"><p class="cap">Scanner intraorale</p></div><div class="fig"><img src="imgs/img_027.jpg"><p class="cap">Kit silicone Futar D</p></div></div>
+<div class="fig"><img src="imgs/img_028.jpg"><p class="cap">Tavolo di trasferimento Splitex</p></div>
+
+<h2>Fase 1 – Acquisizione delle impronte digitali</h2>
+<div class="phase-tag">Fase 1</div>
+<p>Eseguire le scansioni intraorali del paziente come di consueto: mascellare, mandibola, registrazione occlusale e, se necessario, scansioni aggiuntive. Salvare il progetto al termine.</p>
+
+<h2>Fase 2 – Registrazione dell'arco facciale</h2>
+<div class="phase-tag">Fase 2</div>
+<p>Preparare la forchetta di registrazione secondo il protocollo clinico consueto. Posizionarla sul mascellare superiore, applicare l'arco facciale Artex e registrare la posizione del mascellare. Bloccare il giunto 3D e verificare che tutti i componenti siano correttamente serrati prima di rimuovere l'arco facciale.</p>
+<a class="dl" href="https://youtu.be/fdPK2xoHfOo?si=UeGXkbGcaDnH9btC" target="_blank">&#9658; Video: Registrazione arco facciale Artex</a>
+
+<h2>Fase 3 – Digitalizzazione con RotoClick Key Clinic</h2>
+<div class="phase-tag">Fase 3</div>
+<h3>3.1 / 3.2 Acquisizione della forchetta in bocca (consigliato)</h3>
+<p>Con la forchetta ancora posizionata in bocca, scansionare la parte vestibolare dei denti frontali e la superficie visibile della forchetta. È fondamentale che la scansione includa sia i denti che la forchetta, per creare un'area di sovrapposizione corretta per il successivo allineamento digitale.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_029.jpg"><p class="cap">Scansione dei denti frontali con forchetta posizionata</p></div><div class="fig"><img src="imgs/img_030.jpg"><p class="cap">Acquisizione della superficie della forchetta</p></div></div>
+
+<h3>3.3 Trasferimento su Key Clinic</h3>
+<p>Rimuovere l'arco facciale dal paziente. Trasferire il supporto del giunto 3D sul tavolo Splitex e posizionare il marker Key Clinic con l'altezza appropriata sull'alloggiamento magnetico — in modo che la distanza dalla forchetta sia minima senza che i due si tocchino. Creare con Futar D almeno 2 connessioni tra forchetta e marker.</p>
+<div class="fig"><img src="imgs/img_031.jpg"><p class="cap">Risultato digitalizzato: forchetta con connessione al marker</p></div>
+<div class="nb"><strong>Importante:</strong> Comunicare al laboratorio la variante del marker utilizzata.</div>
+<div class="fig"><img src="imgs/img_032.jpg"><p class="cap">Varianti del marker: Small / Standard / Big</p></div>
+
+<h3>3.4 Scansione del Key Clinic</h3>
+<p>Iniziare dalla superficie della forchetta, acquisire tutte le cavità e continuare la scansione lungo la forchetta, attraverso le connessioni fino al dispositivo Key Clinic. Per un corretto riconoscimento geometrico devono essere acquisiti almeno il 30&nbsp;% della superficie del Key Clinic.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_033.jpg"><p class="cap">Connessione tra forchetta e Key Clinic</p></div><div class="fig"><img src="imgs/img_034.jpg"><p class="cap">Scansione della superficie Key Clinic</p></div></div>
+
+<h2>Controllo finale</h2>
+<ul class="cl">
+<li>Forchetta acquisita completamente</li>
+<li>Connessione tra forchetta e Key Clinic visibile e continua</li>
+<li>Almeno un terzo della superficie del marker Key Clinic acquisita</li>
+<li>Nessun errore di tracking o aree mancanti</li>
+<li>Altezza del marker (small/standard/big) indicata nelle note del progetto</li>
+</ul>
+
+<div class="dv"></div>
+<p><span class="pl" onclick="go('artiregister')">&#8594; Vai alla guida ARTIREGISTER</span></p>
+</div>
+<div class="pg" id="p-keyclinic-en"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Clinic</h1><p class="ps">Protocol for digitizing the Artex facebow using an intraoral scanner</p>
+<h2>Introduction</h2>
+<p>The RotoClick Key Clinic system enables digitization of the registration captured with the Artex facebow and the transfer of the spatial position of the maxilla in digital form to the dental laboratory. The protocol comprises three separate phases: acquisition of digital intraoral scans, analog registration with the Artex facebow, and digitization of the registration with RotoClick Key Clinic.</p>
+<p>This way, the information captured with the facebow can be transmitted digitally to the laboratory, without having to ship the transfer stand or other analog components.</p>
+
+<h2>Required materials</h2>
+<ul><li>Intraoral scanner</li><li>Artex facebow and Artex registration fork</li><li>Opaque fixation silicone – Futar D</li><li>Splitex – transfer table</li><li>RotoClick Key Clinic marker</li></ul>
+<div class="fig2"><div class="fig"><img src="imgs/img_035.jpg"><p class="cap">Intraoral scanner</p></div><div class="fig"><img src="imgs/img_036.jpg"><p class="cap">Futar D fixation silicone set</p></div></div>
+<div class="fig"><img src="imgs/img_037.jpg"><p class="cap">Splitex transfer table</p></div>
+
+<h2>Phase 1 – Acquisition of digital impressions</h2>
+<div class="phase-tag">Phase 1</div>
+<p>Perform the patient's intraoral scans as usual and capture the maxilla, mandible, occlusal registration, and any additional scans required for the clinical case (scanbody, preoperative scans). Save the project once the intraoral acquisition is complete.</p>
+
+<h2>Phase 2 – Facebow registration</h2>
+<div class="phase-tag">Phase 2</div>
+<p>Prepare the registration fork according to the usual clinical protocol. Position the fork on the maxilla and check the stability of the registration. Attach the Artex facebow according to the manufacturer's instructions and register the position of the maxilla. Lock the 3D joint and check that all components are correctly tightened before removing the facebow.</p>
+<a class="dl" href="https://youtu.be/fdPK2xoHfOo?si=UeGXkbGcaDnH9btC" target="_blank">&#9658; Video: Artex Facebow Registration</a>
+
+<h2>Phase 3 – Digitization with RotoClick Key Clinic</h2>
+<div class="phase-tag">Phase 3</div>
+<h3>3.1 / 3.2 Capturing the fork in the mouth (recommended)</h3>
+<p>With the fork still positioned in the mouth, scan the vestibular surface of the front teeth and the visible surface of the fork. It's important that the scan includes both the teeth and the fork, to create a correct overlap area for the later digital alignment.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_038.jpg"><p class="cap">Scanning the front teeth with the fork in position</p></div><div class="fig"><img src="imgs/img_039.jpg"><p class="cap">Capturing the fork surface</p></div></div>
+
+<h3>3.3 Transfer to Key Clinic</h3>
+<p>Remove the facebow from the patient. Transfer the 3D joint support to the Splitex transfer table and position the Key Clinic marker with the appropriate height on the magnetic mount — so that the distance to the fork is as small as possible without the two touching. Create at least 2 connections between fork and marker using Futar D.</p>
+<div class="fig"><img src="imgs/img_040.jpg"><p class="cap">Digitized result: fork with marker connection</p></div>
+<div class="nb"><strong>Important:</strong> Inform the lab of the marker variant used.</div>
+<div class="fig"><img src="imgs/img_041.jpg"><p class="cap">Marker variants: Small / Standard / Big</p></div>
+
+<h3>3.4 Scanning the Key Clinic</h3>
+<p>Start at the surface of the fork, capture all recesses and continue the scan along the fork, across the connections, to the RotoClick Key Clinic device. For correct geometric recognition, at least 30&nbsp;% of the Key Clinic surface should be captured.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_042.jpg"><p class="cap">Connection between fork and Key Clinic</p></div><div class="fig"><img src="imgs/img_043.jpg"><p class="cap">Scanning the Key Clinic surface</p></div></div>
+
+<h2>Final check</h2>
+<ul class="cl">
+<li>Fork fully captured</li>
+<li>Connection between fork and Key Clinic visible and continuous</li>
+<li>At least one third of the Key Clinic marker surface captured</li>
+<li>No tracking errors or missing areas present</li>
+<li>Marker height (small/standard/big) noted in the project notes</li>
+</ul>
+
+<div class="dv"></div>
+<p><span class="pl" onclick="go('artiregister')">&#8594; Continue to the ARTIREGISTER Guide</span></p>
+</div>
+
+<div class="pg" id="p-artiregister-de"><p class="pr">Rev.1 — 18/06/2026</p><h1>ARTIREGISTER</h1><p class="ps">Ausrichtung der Key Clinic Registrierung in Exocad</p>
+<h2>Einführung</h2>
+<p>Dieses Verfahren beschreibt die korrekte Ausrichtung der mit dem RotoClick Key Clinic System erfassten Registrierung innerhalb von Exocad. Ziel ist die Übertragung der mit dem Artex-Gesichtsbogen registrierten und mittels Key Clinic digitalisierten räumlichen Position des Oberkiefers.</p>
+<div class="nb"><strong>Wichtig:</strong> Bevor Sie irgendeine andere Operation durchführen, wechseln Sie in den Expertenmodus und folgen Sie allen Schritten in diesem Handbuch.</div>
+
+<h2>Fallanlage</h2>
+<p>Die Verwendung des Artikulators <strong>Artex CR</strong> in der Exocad-Datenbank angeben:</p>
+<div class="fig"><img src="imgs/img_044.jpg"><p class="cap">Exocad-Fallanlage mit Zahnschema</p></div>
+<div class="fig"><img src="imgs/img_045.jpg"><p class="cap">Auswahl „In articolatore Artex CR" als Scanmodus</p></div>
+
+<h2>Erforderliche Dateien</h2>
+<p>Bevor Sie beginnen, stellen Sie sicher, dass Ihnen folgende Daten vorliegen:</p>
+<ul>
+<li>Oberkiefer (ggf. mit Scanbodies oder präoperativen Scans)</li>
+<li>Unterkiefer (ggf. mit zusätzlichen Daten)</li>
+<li>Okklusionsregistrat, sofern die Kiefer nicht bereits ausgerichtet sind</li>
+<li>STL-Datei mit dem Scan des RotoClick Key Clinic Systems</li>
+</ul>
+<div class="fig"><img src="imgs/img_046.jpg"><p class="cap">Erforderliche Dateien im Exocad-Projektordner</p></div>
+
+<h2>Import der Gabel + Marker-Scans</h2>
+<p>Werkzeuge → <strong>Mesh hinzufügen/entfernen</strong>.</p>
+<div class="fig"><img src="imgs/img_047.jpg"><p class="cap">Werkzeuge-Menü mit „Aggiungi/rimuovi mesh"</p></div>
+<p>Importieren Sie die Datei der Registriergabel + des Markers als <strong>„Generisches Visualisierung-Mesh"</strong>. Laden Sie auf gleiche Weise auch die Marker-Bibliothek aus dem Ordner „artiregister" als Visualisierungsobjekt.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_048.jpg"><p class="cap">Auswahl-Dialog Mesh-Typ</p></div><div class="fig"><img src="imgs/img_049.jpg"><p class="cap">Import der Gabel+Marker-Scans</p></div></div>
+<div class="nb"><strong>Achtung:</strong> Es ist von entscheidender Bedeutung, die korrekte Höhenvariante zu laden und beim Import diese Option auszuwählen.</div>
+<div class="fig"><img src="imgs/img_050.jpg"><p class="cap">Auswahl des korrekten Koordinatensystems beim Import</p></div>
+
+<h2>Import des Markers</h2>
+<div class="nb"><strong>Tipp:</strong> Ändern Sie die Darstellung des Markers auf <strong>„Nur flache Schattierung"</strong> über Rechtsklick → Darstellung → Nur flache Schattierung.</div>
+<div class="fig"><img src="imgs/img_051.jpg"><p class="cap">Darstellungsoptionen: „Solo ombreggiatura piatta" auswählen</p></div>
+<p>Nun verwenden wir die Marker-Bibliothek als Referenz für den Artex-Artikulator. Die anderen Objekte (Oberkiefer, Unterkiefer sowie der Gabel+Marker-Scan) befinden sich noch in allgemeinen Positionen im Raum. Im nächsten Schritt werden sie korrekt an den Koordinaten des virtuellen Artikulators ausgerichtet.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_052.jpg"><p class="cap">Marker-Bibliothek als flache Schattierung</p></div><div class="fig"><img src="imgs/img_053.jpg"><p class="cap">Marker-Referenz im virtuellen Artikulator</p></div></div>
+<div class="nb"><strong>Wichtig:</strong> Die Position der Marker-Bibliothek darf niemals verändert werden.</div>
+
+<h2>Vorausrichtung</h2>
+<p>Exocad zeigt nun die zum Fall gehörenden Intraoralscans, den Gabel+Marker-Scan, sowie die Key Clinic Marker-Bibliothek an. Vor dem Matching den Gabel+Marker-Scan manuell in eine für das Matching geeignete Perspektive verschieben:</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_054.jpg"><p class="cap">Alle geladenen Objekte in der Szene</p></div><div class="fig"><img src="imgs/img_055.jpg"><p class="cap">Manuelle Vorausrichtung des Gabel+Marker-Scans</p></div></div>
+
+<h3>Auswahl der Referenzpunkte</h3>
+<p>Identifizieren Sie drei eindeutig erkennbare Punkte des Markers, die in beiden Scans vorhanden sind.</p>
+<div class="fig"><img src="imgs/img_056.jpg"><p class="cap">Auswahl von drei Referenzpunkten auf dem Marker</p></div>
+
+<h2>Automatische Registrierung</h2>
+<p>Exocad berechnet automatisch die bestmögliche anfängliche Überlagerung der beiden Meshes. Wählen Sie nach der ersten Registrierung die <strong>Best-Fit-Anpassung</strong> — die Software optimiert anschließend die Überlagerung der gemeinsamen Oberflächen weiter.</p>
+<div class="fig"><img src="imgs/img_057.jpg"><p class="cap">Ergebnis der automatischen Best-Fit-Registrierung</p></div>
+
+<h2>Kontrolle der Ausrichtung</h2>
+<p>Überprüfen Sie die farbcodierte Überlagerungskarte. Eine korrekte Ausrichtung zeigt überwiegend Farben mit minimalen Abweichungen und keine offensichtlichen Fehlstellungen. Drehen Sie das Modell und kontrollieren Sie aus verschiedenen Blickwinkeln. Klicken Sie auf <strong>OK</strong> zur Bestätigung.</p>
+<div class="fig"><img src="imgs/img_058.jpg"><p class="cap">Farbcodierte Distanzkarte zur Kontrolle der Ausrichtung</p></div>
+
+<h2>Verschieben der Intraoralscans</h2>
+<p>Im letzten Schritt werden alle Intraoralscans in die Position des ausgerichteten Oberkiefers gebracht. Öffnen Sie erneut <strong>Mesh registrieren</strong> und verwenden Sie die Funktion <strong>„Weitere bewegliche Teile auswählen"</strong>, um alle Scans als einen einzigen Block zu verschieben.</p>
+<div class="fig"><img src="imgs/img_059.jpg"><p class="cap">Funktion „Weitere bewegliche Teile auswählen" aktivieren</p></div>
+<div class="nb"><strong>Achtung:</strong> Verschieben Sie alle Scans als Block. Andernfalls werden die Okklusion sowie die Positionierung von präoperativen Scans oder Scanbodies verändert.</div>
+<p>Wählen Sie 3 gemeinsame Punkte auf den Scans des Oberkiefers aus und führen Sie anschließend Registrierung und Best-Fit-Anpassung durch.</p>
+<div class="fig"><img src="imgs/img_060.jpg"><p class="cap">Registrierung der Intraoralscans am ausgerichteten Oberkiefer</p></div>
+<div class="fig"><img src="imgs/img_061.jpg"><p class="cap">Virtueller Artikulator zur finalen Positionskontrolle</p></div>
+
+<h2>Abschlusskontrolle</h2>
+<ul class="cl">
+<li>Daten vollständig und korrekt ausgerichtet</li>
+<li>Keine doppelten Meshes vorhanden</li>
+<li>Registrierung aus allen Ansichten stabil</li>
+<li>Distanzkarte zeigt minimale Abweichungen in den Überlappungsbereichen</li>
+<li>Virtueller Artikulator gestartet und endgültige Position überprüft</li>
+</ul>
+
+<h2>Fehlerbehebung</h2>
+<h3>Fehlerhafte Registrierung</h3>
+<p><strong>Mögliche Ursachen:</strong> Falsch ausgewählte Referenzpunkte, unvollständiger Scan, unzureichende gemeinsame Scanbereiche. <strong>Lösung:</strong> Vorausrichtung erneut durchführen, weiter voneinander entfernte Referenzpunkte wählen, Qualität der Scans prüfen.</p>
+<h3>Unzureichendes Best-Fit-Ergebnis</h3>
+<p><strong>Mögliche Ursachen:</strong> Scanartefakte, Registriergabel nur teilweise erfasst, Tracking-Verlust, Scandaten nicht bereinigt. <strong>Lösung:</strong> Registrierung erneut durchführen, Meshes überprüfen, Scandaten zuschneiden, Funktion „Bereiche ausschließen" verwenden oder Scan neu aufnehmen.</p>
+
+<div class="dv"></div>
+<p><span class="pl" onclick="go('keylab')">&#8594; Weiter zur Key Lab Anleitung</span></p>
+</div>
+<div class="pg" id="p-artiregister-it"><p class="pr">Rev.1 — 18/06/2026</p><h1>ARTIREGISTER</h1><p class="ps">Allineamento della registrazione Key Clinic in Exocad</p>
+<h2>Introduzione</h2>
+<p>Questa procedura descrive il corretto allineamento della registrazione acquisita con il sistema RotoClick Key Clinic all'interno di Exocad. L'obiettivo è il trasferimento della posizione spaziale del mascellare superiore, registrata con l'arco facciale Artex e digitalizzata tramite Key Clinic.</p>
+<div class="nb"><strong>Importante:</strong> Prima di eseguire qualsiasi altra operazione, passare alla modalità esperto e seguire tutti i passaggi di questo manuale.</div>
+
+<h2>Creazione del caso</h2>
+<p>Indicare l'utilizzo dell'articolatore <strong>Artex CR</strong> nel database Exocad:</p>
+<div class="fig"><img src="imgs/img_062.jpg"><p class="cap">Creazione del caso Exocad con schema dentale</p></div>
+<div class="fig"><img src="imgs/img_063.jpg"><p class="cap">Selezione "In articolatore Artex CR" come modalità di scansione</p></div>
+
+<h2>File necessari</h2>
+<p>Prima di iniziare, verificare di disporre dei seguenti dati:</p>
+<ul>
+<li>Mascellare (eventualmente con scanbody o scansioni preoperatorie)</li>
+<li>Mandibola (eventualmente con dati aggiuntivi)</li>
+<li>Registrazione occlusale, se mascellare e mandibola non sono già allineati</li>
+<li>File STL con la scansione del sistema RotoClick Key Clinic</li>
+</ul>
+<div class="fig"><img src="imgs/img_064.jpg"><p class="cap">File necessari nella cartella del progetto Exocad</p></div>
+
+<h2>Import delle scansioni forchetta + marker</h2>
+<p>Strumenti → <strong>Aggiungi/rimuovi mesh</strong>.</p>
+<div class="fig"><img src="imgs/img_065.jpg"><p class="cap">Menu Strumenti con "Aggiungi/rimuovi mesh"</p></div>
+<p>Importare il file della forchetta di registrazione + marker come <strong>"Mesh di visualizzazione generica"</strong>. Caricare allo stesso modo anche la libreria marker dalla cartella "artiregister".</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_066.jpg"><p class="cap">Finestra di selezione del tipo di mesh</p></div><div class="fig"><img src="imgs/img_067.jpg"><p class="cap">Import delle scansioni forchetta+marker</p></div></div>
+<div class="nb"><strong>Attenzione:</strong> È fondamentale caricare la variante di altezza corretta selezionando questa opzione durante l’import.</div>
+<div class="fig"><img src="imgs/img_068.jpg"><p class="cap">Selezione del corretto sistema di coordinate durante l’import</p></div>
+
+<h2>Import del marker</h2>
+<div class="nb"><strong>Suggerimento:</strong> Modificare la visualizzazione del marker in <strong>"Solo ombreggiatura piatta"</strong> tramite Clic destro → Visualizzazione → Solo ombreggiatura piatta.</div>
+<div class="fig"><img src="imgs/img_069.jpg"><p class="cap">Opzioni di visualizzazione: selezionare "Solo ombreggiatura piatta"</p></div>
+<p>Ora utilizziamo la libreria marker come riferimento per l'articolatore Artex. Gli altri oggetti (mascellare, mandibola e la scansione forchetta+marker) si trovano ancora in posizioni generiche nello spazio. Nel passaggio successivo verranno allineati correttamente alle coordinate dell'articolatore virtuale.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_070.jpg"><p class="cap">Libreria marker in ombreggiatura piatta</p></div><div class="fig"><img src="imgs/img_071.jpg"><p class="cap">Riferimento marker nell’articolatore virtuale</p></div></div>
+<div class="nb"><strong>Importante:</strong> La posizione della libreria marker non deve mai essere modificata.</div>
+
+<h2>Pre-allineamento</h2>
+<p>Exocad mostra ora le scansioni intraorali del caso, la scansione forchetta+marker e la libreria marker Key Clinic. Prima del matching, spostare manualmente la scansione forchetta+marker in una prospettiva adatta:</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_072.jpg"><p class="cap">Tutti gli oggetti caricati nella scena</p></div><div class="fig"><img src="imgs/img_073.jpg"><p class="cap">Pre-allineamento manuale della scansione forchetta+marker</p></div></div>
+
+<h3>Selezione dei punti di riferimento</h3>
+<p>Identificare tre punti chiaramente riconoscibili del marker presenti in entrambe le scansioni.</p>
+<div class="fig"><img src="imgs/img_074.jpg"><p class="cap">Selezione di tre punti di riferimento sul marker</p></div>
+
+<h2>Registrazione automatica</h2>
+<p>Exocad calcola automaticamente la sovrapposizione iniziale ottimale. Dopo la prima registrazione, selezionare l'<strong>adattamento Best-Fit</strong> — il software ottimizza ulteriormente la sovrapposizione delle superfici comuni.</p>
+<div class="fig"><img src="imgs/img_075.jpg"><p class="cap">Risultato della registrazione automatica Best-Fit</p></div>
+
+<h2>Controllo dell’allineamento</h2>
+<p>Verificare la mappa di sovrapposizione colorata. Un allineamento corretto mostra principalmente colori con deviazioni minime e nessun disallineamento evidente. Ruotare il modello e controllare da diverse angolazioni. Cliccare su <strong>OK</strong> per confermare.</p>
+<div class="fig"><img src="imgs/img_076.jpg"><p class="cap">Mappa delle distanze colorata per il controllo dell’allineamento</p></div>
+
+<h2>Spostamento delle scansioni intraorali</h2>
+<p>Nell'ultimo passaggio, tutte le scansioni intraorali vengono portate nella posizione del mascellare appena allineato. Riaprire <strong>Registra mesh</strong> e usare <strong>"Seleziona altre parti in movimento"</strong> per spostare tutte le scansioni come un unico blocco.</p>
+<div class="fig"><img src="imgs/img_077.jpg"><p class="cap">Attivazione di "Seleziona altre parti in movimento"</p></div>
+<div class="nb"><strong>Attenzione:</strong> Spostare tutte le scansioni come blocco. Altrimenti verranno modificate l'occlusione e il posizionamento delle scansioni preoperatorie o degli scanbody.</div>
+<p>Selezionare 3 punti comuni sulle scansioni del mascellare superiore ed eseguire registrazione e adattamento Best-Fit.</p>
+<div class="fig"><img src="imgs/img_078.jpg"><p class="cap">Registrazione delle scansioni intraorali sul mascellare allineato</p></div>
+<div class="fig"><img src="imgs/img_079.jpg"><p class="cap">Articolatore virtuale per il controllo finale della posizione</p></div>
+
+<h2>Controllo finale</h2>
+<ul class="cl">
+<li>Dati completamente e correttamente allineati</li>
+<li>Nessuna mesh duplicata presente</li>
+<li>Registrazione stabile da tutte le angolazioni</li>
+<li>Mappa delle distanze mostra deviazioni minime nelle aree di sovrapposizione</li>
+<li>Articolatore virtuale avviato e posizione finale verificata</li>
+</ul>
+
+<h2>Risoluzione dei problemi</h2>
+<h3>Registrazione errata</h3>
+<p><strong>Possibili cause:</strong> punti di riferimento selezionati in modo errato, scansione incompleta della forchetta, aree comuni di scansione insufficienti. <strong>Soluzione:</strong> ripetere il pre-allineamento, scegliere punti di riferimento più distanti tra loro, verificare la qualità delle scansioni.</p>
+<h3>Risultato Best-Fit insufficiente</h3>
+<p><strong>Possibili cause:</strong> artefatti di scansione, forchetta acquisita solo parzialmente, perdita di tracking, dati di scansione non puliti. <strong>Soluzione:</strong> ripetere la registrazione, verificare le mesh originali, ritagliare e pulire i dati di scansione, usare la funzione "Escludi aree" o ripetere la scansione.</p>
+
+<div class="dv"></div>
+<p><span class="pl" onclick="go('keylab')">&#8594; Vai alla guida Key Lab</span></p>
+</div>
+<div class="pg" id="p-artiregister-en"><p class="pr">Rev.1 — 18/06/2026</p><h1>ARTIREGISTER</h1><p class="ps">Aligning the Key Clinic registration in Exocad</p>
+<h2>Introduction</h2>
+<p>This procedure describes the correct alignment of the registration captured with the RotoClick Key Clinic system within Exocad. The goal is to transfer the spatial position of the maxilla, registered with the Artex facebow and digitized via Key Clinic.</p>
+<div class="nb"><strong>Important:</strong> Before performing any other operation, switch to expert mode and follow all the steps in this guide.</div>
+
+<h2>Case setup</h2>
+<p>Specify the use of the <strong>Artex CR</strong> articulator in the Exocad database:</p>
+<div class="fig"><img src="imgs/img_080.jpg"><p class="cap">Exocad case setup with tooth chart</p></div>
+<div class="fig"><img src="imgs/img_081.jpg"><p class="cap">Selecting "In articulator Artex CR" as scan mode</p></div>
+
+<h2>Required files</h2>
+<p>Before starting, make sure you have the following data available:</p>
+<ul>
+<li>Maxilla (possibly with scanbodies or preoperative scans)</li>
+<li>Mandible (possibly with additional data)</li>
+<li>Occlusal registration, if maxilla and mandible are not already aligned to each other</li>
+<li>STL file with the scan of the RotoClick Key Clinic system</li>
+</ul>
+<div class="fig"><img src="imgs/img_082.jpg"><p class="cap">Required files in the Exocad project folder</p></div>
+
+<h2>Importing the fork + marker scans</h2>
+<p>Tools → <strong>Add/remove mesh</strong>.</p>
+<div class="fig"><img src="imgs/img_083.jpg"><p class="cap">Tools menu with "Add/remove mesh"</p></div>
+<p>Import the registration fork + marker file as <strong>"Generic visualization mesh"</strong>. Likewise, load the marker library from the "artiregister" folder as a visualization object.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_084.jpg"><p class="cap">Mesh type selection dialog</p></div><div class="fig"><img src="imgs/img_085.jpg"><p class="cap">Importing the fork+marker scans</p></div></div>
+<div class="nb"><strong>Caution:</strong> It is critical to load the correct height variant and select this option during import.</div>
+<div class="fig"><img src="imgs/img_086.jpg"><p class="cap">Selecting the correct coordinate system during import</p></div>
+
+<h2>Importing the marker</h2>
+<div class="nb"><strong>Tip:</strong> To make alignment easier, change the marker's display to <strong>"Flat shading only"</strong> via Right-click → Display → Flat shading only.</div>
+<div class="fig"><img src="imgs/img_087.jpg"><p class="cap">Display options: select "Flat shading only"</p></div>
+<p>We now use the marker library as a reference for the Artex articulator. The other objects (maxilla, mandible, and the fork+marker scan) are still in generic positions in space. In the next step, they will be correctly aligned to the coordinates of the virtual articulator.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_088.jpg"><p class="cap">Marker library in flat shading</p></div><div class="fig"><img src="imgs/img_089.jpg"><p class="cap">Marker reference in the virtual articulator</p></div></div>
+<div class="nb"><strong>Important:</strong> The position of the marker library must never be changed.</div>
+
+<h2>Pre-alignment</h2>
+<p>Exocad now displays the intraoral scans belonging to the case, the fork+marker scan, and the Key Clinic marker library. Before matching, manually move the fork+marker scan into a perspective suitable for matching:</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_090.jpg"><p class="cap">All loaded objects in the scene</p></div><div class="fig"><img src="imgs/img_091.jpg"><p class="cap">Manual pre-alignment of the fork+marker scan</p></div></div>
+
+<h3>Selecting reference points</h3>
+<p>Identify three clearly recognizable points on the marker that are present in both scans.</p>
+<div class="fig"><img src="imgs/img_092.jpg"><p class="cap">Selecting three reference points on the marker</p></div>
+
+<h2>Automatic registration</h2>
+<p>Exocad automatically calculates the best possible initial overlap of the two meshes. After the first registration, select <strong>Best-Fit adjustment</strong> — the software then further optimizes the overlap of the shared surfaces.</p>
+<div class="fig"><img src="imgs/img_093.jpg"><p class="cap">Result of the automatic Best-Fit registration</p></div>
+
+<h2>Checking the alignment</h2>
+<p>Check the color-coded overlap map. A correct alignment is characterized by a predominant proportion of colors showing only minimal deviations and the absence of any obvious misalignment. Rotate the model and check the result from different angles. Click <strong>OK</strong> to confirm the registration.</p>
+<div class="fig"><img src="imgs/img_094.jpg"><p class="cap">Color-coded distance map for checking the alignment</p></div>
+
+<h2>Moving the intraoral scans</h2>
+<p>In the final step, all intraoral scans are brought into the position of the maxilla just aligned. Reopen <strong>Register mesh</strong> and use the <strong>"Select further moving parts"</strong> function to move all scans as a single block.</p>
+<div class="fig"><img src="imgs/img_095.jpg"><p class="cap">Activating "Select further moving parts"</p></div>
+<div class="nb"><strong>Caution:</strong> Move all scans as a block. Otherwise the occlusion and the positioning of preoperative scans or scanbodies will be altered.</div>
+<p>Select 3 common points on the maxillary scans and then carry out registration and Best-Fit adjustment.</p>
+<div class="fig"><img src="imgs/img_096.jpg"><p class="cap">Registration of the intraoral scans on the aligned maxilla</p></div>
+<div class="fig"><img src="imgs/img_097.jpg"><p class="cap">Virtual articulator for final position check</p></div>
+
+<h2>Final check</h2>
+<ul class="cl">
+<li>Data fully and correctly aligned</li>
+<li>No duplicate meshes present</li>
+<li>Registration stable from all views</li>
+<li>Distance map shows minimal deviations in the overlap areas</li>
+<li>Virtual articulator started and final position checked</li>
+</ul>
+
+<h2>Troubleshooting</h2>
+<h3>Faulty registration</h3>
+<p><strong>Possible causes:</strong> incorrectly selected reference points, incomplete scan of the registration fork, insufficient common scan areas. <strong>Solution:</strong> redo the pre-alignment, choose reference points further apart, check the quality of the scans.</p>
+<h3>Insufficient Best-Fit result</h3>
+<p><strong>Possible causes:</strong> scan artifacts, registration fork only partially captured, tracking loss during acquisition, scan data not sufficiently cleaned. <strong>Solution:</strong> redo the registration, check the original meshes, trim and clean the scan data, use the "Exclude areas" function, or rescan if necessary.</p>
+
+<div class="dv"></div>
+<p><span class="pl" onclick="go('keylab')">&#8594; Continue to the Key Lab Guide</span></p>
+</div>
+
+<div class="pg" id="p-keylab-de"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Lab</h1><p class="ps">Übertragung digitaler Modelle in den physischen Artikulator</p>
+<h2>Einleitung</h2>
+<p>RotoClick Key Lab ist ein System zur präzisen Übertragung digitaler CAD-Modelle in den physischen Artikulator, wobei die zuvor im virtuellen Artikulator definierte räumliche Position des Oberkiefers erhalten bleibt.</p>
+<p>Das in den digitalen Exocad-Workflow integrierte System ermöglicht die Erstellung von 3D-Druckmodellen mit speziellen Schnittstellen für eine schnelle, präzise und reproduzierbare Montage im physischen Artikulator. Dank der Übereinstimmung zwischen digitaler Umgebung und analogem Artikulator kann der Techniker die Arbeit sowohl virtuell als auch mechanisch überprüfen.</p>
+
+<h2>Phase 1 — Modellausrichtung im Model Creator</h2>
+<div class="phase-tag">Phase 1</div>
+<p>Innerhalb des Model Creator wählen Sie das für den jeweiligen Fall am besten geeignete RotoClick Key Lab-Modell aus. Die verschiedenen Konfigurationen bestimmen sowohl die verfügbare vertikale Höhe zwischen den Kieferbögen als auch den Typ der Platten für die anschließende Montage im Artikulator.</p>
+<div class="fig"><img src="imgs/img_098.jpg"><p class="cap">Modellauswahl im Model Creator</p></div>
+<div class="fig"><img src="imgs/img_099.jpg"><p class="cap">Konfigurationsübersicht: 1U1L (46mm), 1U2L (36mm), 2U1L (36mm), 2U2L (26mm)</p></div>
+<p>Die Auswahl muss unter Berücksichtigung folgender Faktoren erfolgen:</p>
+<ul><li>Gesamthöhe der Scandaten</li><li>Vorhandensein von Implantatanalogen</li><li>Art des herzustellenden Modells</li><li>Erforderlicher Platz für die Montage im Artikulator</li></ul>
+<div class="fig"><img src="imgs/img_100.jpg"><p class="cap">Modellausrichtung mit Höhenanzeige für Maxilla und Mandibula</p></div>
+
+<p>Die XL-Konfiguration <strong>(60 mm)</strong> eignet sich besonders für komplexe Implantatfälle, bei denen Implantatanaloge in beiden Kieferbögen erforderlich sind oder zusätzlicher vertikaler Platz für prothetische Komponenten benötigt wird.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_101.jpg"><p class="cap">Modell im Artikulator montiert</p></div><div class="fig"><img src="imgs/img_102.jpg"><p class="cap">XL-Konfiguration von vorne</p></div></div>
+<div class="fig"><img src="imgs/img_103.jpg"><p class="cap">Modelltyp-Auswahlmenü im RotoClick Model Creator</p></div>
+
+<h3>Modelltyp</h3>
+<p>Die verfügbaren Optionen ermöglichen die Erstellung von Standardmodellen, Modellen mit herausnehmbaren Stümpfen, Modellen mit Implantatanalogen, Modellen mit Drainageöffnungen für den Direktdruck, sowie Modellen mit Kontrollfenstern zur Überprüfung der korrekten Positionierung der Implantatanaloge.</p>
+<div class="fig"><img src="imgs/img_104.jpg"><p class="cap">Übersicht der Modelltyp-Optionen A–G</p></div>
+
+<h3>Positionierung im Artikulator</h3>
+<p>Um die zuvor im virtuellen Artikulator festgelegte räumliche Position beizubehalten, aktivieren Sie die Option „Ausrichtung auf die ursprünglichen Scandaten wiederherstellen". Diese Funktion übernimmt die im virtuellen Artikulator ermittelte Position korrekt in das Key Lab-System.</p>
+<div class="fig"><img src="imgs/img_105.jpg"><p class="cap">Option zur Wiederherstellung der ursprünglichen Ausrichtung</p></div>
+<p>Wurde das Projekt zuvor nicht im virtuellen Artikulator artikuliert, müssen die Modelle manuell positioniert werden. Verwenden Sie dabei das Bonwill-Dreieck sowie die im Softwarefenster angezeigten Hilfslinien als Referenz.</p>
+<div class="fig"><img src="imgs/img_106.jpg"><p class="cap">Manuelle Positionierung mit Bonwill-Dreieck als Referenz</p></div>
+
+<h2>Phase 2 — Modellkonstruktion ohne Bauplattform</h2>
+<div class="phase-tag">Phase 2</div>
+<p>Während dieses Schritts erzeugt die Software ein Visualisierungsobjekt, das die Position der RotoClick-Verbindungselemente innerhalb des Modells darstellt. Diese Darstellung ermöglicht die Kontrolle der korrekten Ausrichtung sowie die Überprüfung, ob das Modellvolumen mit dem ausgewählten Befestigungssystem kompatibel ist.</p>
+<div class="fig"><img src="imgs/img_107.jpg"><p class="cap">Visualisierungsobjekt der RotoClick-Verbindungselemente</p></div>
+<div class="fig"><img src="imgs/img_108.jpg"><p class="cap">Stützstrukturen in Relation zum Modell</p></div>
+
+<p>In einigen Fällen kann das Modell gegenüber der RotoClick-Aufnahme dezentriert sein. Ragen die Ränder zu weit über die Basis hinaus, kann dies die Druckstabilität beeinträchtigen. Zur Korrektur stehen der dreidimensionale Manipulator (blauer Pfeil) und der Befehl „Aus Ansicht übernehmen" zur Verfügung.</p>
+<div class="fig"><img src="imgs/img_109.jpg"><p class="cap">Korrektur der Modellausrichtung mit dem 3D-Manipulator</p></div>
+
+<p>Wiederholen Sie den Vorgang für das Antagonistenmodell. Beide Kieferbögen müssen in Bezug auf die RotoClick-Aufnahmen korrekt zentriert sein, um eine präzise und stabile Montage im Artikulator zu gewährleisten.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_110.jpg"><p class="cap">Ausrichtung des Antagonistenmodells</p></div><div class="fig"><img src="imgs/img_111.jpg"><p class="cap">Zentrierte Stützstruktur um den Zahnbogen</p></div></div>
+<div class="fig"><img src="imgs/img_112.jpg"><p class="cap">Korrekt zentriertes Modell ohne Überstand</p></div>
+
+<h2>Phase 3 — Modell-Attachments</h2>
+<div class="phase-tag">Phase 3</div>
+<p>Die Software lädt automatisch das Standard-Attachment <strong>rotoclick_KEY_LAB_PLUS</strong>, das für den Druck mit Stützpins empfohlen wird.</p>
+<div class="fig"><img src="imgs/img_113.jpg"><p class="cap">Standard-Attachment rotoclick_KEY_LAB_PLUS</p></div>
+<p>Für den Direktdruck auf der Bauplattform wird empfohlen, das Standard-Attachment durch <strong>rotoclick_DRAIN_HOLES</strong> zu ersetzen — mit Drainageöffnungen zum Abfluss des Harzes und rückseitigen Fasen, die das Ablösen erleichtern.</p>
+<div class="fig"><img src="imgs/img_114.jpg"><p class="cap">Attachment rotoclick_DRAIN_HOLES für den Direktdruck</p></div>
+<p>Im Menü TEXT kann eine dauerhafte Kennzeichnung direkt auf dem Modell hinzugefügt werden. Es wird empfohlen, die in Phase 1 gewählte Konfiguration (z.&nbsp;B. 1U1L, 1U2L, 2U1L, 2U2L oder XL) als Kennzeichnung zu verwenden.</p>
+<div class="fig"><img src="imgs/img_115.jpg"><p class="cap">Textkennzeichnung „1U2L" direkt auf dem Modell</p></div>
+
+<h2>Phase 4 — Druckvorbereitung</h2>
+<div class="phase-tag">Phase 4</div>
+<p>Bei Verwendung von Druckstützen ist darauf zu achten, dass keine Stützstruktur die Passflächen des RotoClick-Systems beeinträchtigt. Der Umfang der Plattenaufnahme muss vollständig frei bleiben, um eine präzise und wiederholgenaue Verbindung im Artikulator zu gewährleisten.</p>
+<div class="fig"><img src="imgs/img_116.jpg"><p class="cap">Stützstrukturen dürfen die Passflächen nicht beeinträchtigen</p></div>
+<p>Beim Direktdruck mit dem Attachment rotoclick_DRAIN_HOLES ist sicherzustellen, dass die Basis des Modells vollständig auf der Bauplattform aufliegt und keine unerwünschten Neigungen vorhanden sind.</p>
+<div class="fig"><img src="imgs/img_117.jpg"><p class="cap">Korrekte Auflage der Modellbasis auf der Bauplattform</p></div>
+<p>Nach Abschluss des Druckvorgangs lösen Sie das Modell mit einem dünnen Spatel von der Bauplattform. Beginnen Sie das Ablösen an den dafür vorgesehenen, abgeschrägten Bereichen, um Beschädigungen der Passflächen zu vermeiden.</p>
+<div class="fig"><img src="imgs/img_118.jpg"><p class="cap">Ablösen des Modells an den abgeschrägten Bereichen</p></div>
+
+<h2>Phase 5 — Montage im Artikulator</h2>
+<div class="phase-tag">Phase 5</div>
+<p>Nach dem Reinigen und Aushärten der Modelle montieren Sie die weißen Basisplatten und setzen Sie die Modelle anschließend in den Artikulator ein.</p>
+<a class="dl" href="https://youtu.be/I4vS7ljNdaY" target="_blank">&#9658; Video: Montage im Artikulator</a>
+
+<div class="dv"></div>
+<div class="nb"><span class="pl" onclick="go('kalibrierung')">&#8594; Weiter zur Kalibrierung</span> — bei nicht zufriedenstellender Genauigkeit oder für Nicht-ARTEX-Artikulatoren.</div>
+</div>
+<div class="pg" id="p-keylab-it"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Lab</h1><p class="ps">Trasferimento dei modelli digitali nell'articolatore fisico</p>
+<h2>Introduzione</h2>
+<p>RotoClick Key Lab è un sistema per il trasferimento preciso di modelli CAD digitali nell'articolatore fisico, mantenendo la posizione spaziale del mascellare superiore definita nell'articolatore virtuale.</p>
+<p>Il sistema, integrato nel flusso di lavoro digitale Exocad, consente la creazione di modelli stampati in 3D con interfacce speciali per un montaggio rapido, preciso e riproducibile nell'articolatore fisico. Grazie alla corrispondenza tra ambiente digitale e articolatore analogico, il tecnico può verificare il lavoro sia virtualmente che meccanicamente.</p>
+
+<h2>Fase 1 — Allineamento del modello nel Model Creator</h2>
+<div class="phase-tag">Fase 1</div>
+<p>All'interno del Model Creator selezionare il modello RotoClick Key Lab più adatto al caso. Le diverse configurazioni determinano sia l'altezza verticale disponibile tra le arcate sia il tipo di piastre necessarie per il successivo montaggio nell'articolatore.</p>
+<div class="fig"><img src="imgs/img_119.jpg"><p class="cap">Selezione del modello nel Model Creator</p></div>
+<div class="fig"><img src="imgs/img_120.jpg"><p class="cap">Panoramica delle configurazioni: 1U1L (46mm), 1U2L (36mm), 2U1L (36mm), 2U2L (26mm)</p></div>
+<p>La selezione deve tenere conto dei seguenti fattori:</p>
+<ul><li>Altezza totale dei dati di scansione</li><li>Presenza di analoghi implantari</li><li>Tipo di modello da produrre</li><li>Spazio necessario per il montaggio nell'articolatore</li></ul>
+<div class="fig"><img src="imgs/img_121.jpg"><p class="cap">Allineamento del modello con indicazione delle altezze mascellare/mandibola</p></div>
+
+<p>La configurazione XL <strong>(60 mm)</strong> è particolarmente indicata per i casi implantari complessi, dove sono necessari analoghi implantari in entrambe le arcate o spazio verticale aggiuntivo per componenti protesiche.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_122.jpg"><p class="cap">Modello montato nell’articolatore</p></div><div class="fig"><img src="imgs/img_123.jpg"><p class="cap">Configurazione XL vista frontale</p></div></div>
+<div class="fig"><img src="imgs/img_124.jpg"><p class="cap">Menu di selezione del tipo di modello nel Model Creator</p></div>
+
+<h3>Tipo di modello</h3>
+<p>Le opzioni disponibili consentono la creazione di modelli standard, modelli con monconi estraibili, modelli con analoghi implantari, modelli con fori di drenaggio per la stampa diretta, e modelli con finestre di controllo per verificare il corretto posizionamento degli analoghi implantari.</p>
+<div class="fig"><img src="imgs/img_125.jpg"><p class="cap">Panoramica delle opzioni di tipo modello A–G</p></div>
+
+<h3>Posizionamento nell'articolatore</h3>
+<p>Per mantenere la posizione spaziale definita precedentemente nell'articolatore virtuale, attivare l'opzione "Ripristina l'allineamento ai dati di scansione originali". Questa funzione trasferisce correttamente la posizione determinata nell'articolatore virtuale al sistema Key Lab.</p>
+<div class="fig"><img src="imgs/img_126.jpg"><p class="cap">Opzione per il ripristino dell’allineamento originale</p></div>
+<p>Se il progetto non è stato precedentemente articolato nell'articolatore virtuale, i modelli devono essere posizionati manualmente. Utilizzare come riferimento il triangolo di Bonwill e le linee guida visualizzate nella finestra del software.</p>
+<div class="fig"><img src="imgs/img_127.jpg"><p class="cap">Posizionamento manuale con il triangolo di Bonwill come riferimento</p></div>
+
+<h2>Fase 2 — Costruzione del modello senza piattaforma</h2>
+<div class="phase-tag">Fase 2</div>
+<p>Durante questo passaggio il software genera un oggetto di visualizzazione che mostra la posizione degli elementi di connessione RotoClick all'interno del modello. Questa rappresentazione consente di controllare il corretto allineamento e verificare se il volume del modello è compatibile con il sistema di fissaggio selezionato.</p>
+<div class="fig"><img src="imgs/img_128.jpg"><p class="cap">Oggetto di visualizzazione degli elementi di connessione RotoClick</p></div>
+<div class="fig"><img src="imgs/img_129.jpg"><p class="cap">Strutture di supporto in relazione al modello</p></div>
+
+<p>In alcuni casi il modello può risultare decentrato rispetto all'alloggiamento RotoClick. Se i bordi sporgono troppo oltre la base, questo può compromettere la stabilità di stampa. Per la correzione sono disponibili il manipolatore tridimensionale (freccia blu) e il comando "Recupera dall'orientamento originale".</p>
+<div class="fig"><img src="imgs/img_130.jpg"><p class="cap">Correzione dell’allineamento del modello con il manipolatore 3D</p></div>
+
+<p>Ripetere il procedimento per il modello antagonista. Entrambe le arcate devono essere correttamente centrate rispetto agli alloggiamenti RotoClick, per garantire un montaggio preciso e stabile nell'articolatore.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_131.jpg"><p class="cap">Allineamento del modello antagonista</p></div><div class="fig"><img src="imgs/img_132.jpg"><p class="cap">Struttura di supporto centrata attorno all’arcata</p></div></div>
+<div class="fig"><img src="imgs/img_133.jpg"><p class="cap">Modello correttamente centrato senza sporgenze</p></div>
+
+<h2>Fase 3 — Attachment del modello</h2>
+<div class="phase-tag">Fase 3</div>
+<p>Il software carica automaticamente l'attachment standard <strong>rotoclick_KEY_LAB_PLUS</strong>, consigliato per la stampa con pin di supporto.</p>
+<div class="fig"><img src="imgs/img_134.jpg"><p class="cap">Attachment standard rotoclick_KEY_LAB_PLUS</p></div>
+<p>Per la stampa diretta sulla piattaforma di costruzione si consiglia di sostituire l'attachment standard con <strong>rotoclick_DRAIN_HOLES</strong> — con fori di drenaggio per il deflusso della resina e smussi posteriori che facilitano il distacco.</p>
+<div class="fig"><img src="imgs/img_135.jpg"><p class="cap">Attachment rotoclick_DRAIN_HOLES per la stampa diretta</p></div>
+<p>Nel menu TESTO è possibile aggiungere una marcatura permanente direttamente sul modello. Si consiglia di utilizzare la configurazione scelta nella Fase 1 (es. 1U1L, 1U2L, 2U1L, 2U2L o XL) come marcatura.</p>
+<div class="fig"><img src="imgs/img_136.jpg"><p class="cap">Marcatura testuale "1U2L" direttamente sul modello</p></div>
+
+<h2>Fase 4 — Preparazione alla stampa</h2>
+<div class="phase-tag">Fase 4</div>
+<p>In caso di utilizzo di supporti di stampa, è necessario verificare che nessuna struttura di supporto interferisca con le superfici di accoppiamento del sistema RotoClick. Il perimetro dell'alloggiamento della piastra deve rimanere completamente libero, per garantire una connessione precisa e ripetibile nell'articolatore.</p>
+<div class="fig"><img src="imgs/img_137.jpg"><p class="cap">Le strutture di supporto non devono interferire con le superfici di accoppiamento</p></div>
+<p>Per la stampa diretta con l'attachment rotoclick_DRAIN_HOLES, verificare che la base del modello sia completamente appoggiata sulla piattaforma di costruzione e che non vi siano inclinazioni indesiderate.</p>
+<div class="fig"><img src="imgs/img_138.jpg"><p class="cap">Corretto appoggio della base del modello sulla piattaforma</p></div>
+<p>Al termine della stampa, staccare il modello dalla piattaforma con una spatola sottile. Iniziare il distacco dalle aree smussate previste a tale scopo, per evitare danni alle superfici di accoppiamento.</p>
+<div class="fig"><img src="imgs/img_139.jpg"><p class="cap">Distacco del modello dalle aree smussate</p></div>
+
+<h2>Fase 5 — Montaggio nell'articolatore</h2>
+<div class="phase-tag">Fase 5</div>
+<p>Dopo la pulizia e la polimerizzazione dei modelli, montare le piastre base bianche e inserire i modelli nell'articolatore.</p>
+<a class="dl" href="https://youtu.be/I4vS7ljNdaY" target="_blank">&#9658; Video: Montaggio nell'articolatore</a>
+
+<div class="dv"></div>
+<div class="nb"><span class="pl" onclick="go('kalibrierung')">&#8594; Vai alla Calibrazione</span> — in caso di precisione non soddisfacente o per articolatori non-ARTEX.</div>
+</div>
+<div class="pg" id="p-keylab-en"><p class="pr">Rev.1 — 18/06/2026</p><h1>Key Lab</h1><p class="ps">Transferring digital models into the physical articulator</p>
+<h2>Introduction</h2>
+<p>RotoClick Key Lab is a system for the precise transfer of digital CAD models into the physical articulator, while preserving the spatial position of the maxilla previously defined in the virtual articulator.</p>
+<p>Integrated into the digital Exocad workflow, the system enables the creation of 3D-printed models with special interfaces for fast, precise, and reproducible mounting in the physical articulator. Thanks to the correspondence between the digital environment and the analog articulator, the technician can verify the work both virtually and mechanically.</p>
+
+<h2>Phase 1 — Model alignment in the Model Creator</h2>
+<div class="phase-tag">Phase 1</div>
+<p>Within the Model Creator, select the RotoClick Key Lab model best suited to the case. The various configurations determine both the available vertical height between the dental arches and the type of plates required for subsequent mounting in the articulator.</p>
+<div class="fig"><img src="imgs/img_140.jpg"><p class="cap">Model selection in the Model Creator</p></div>
+<div class="fig"><img src="imgs/img_141.jpg"><p class="cap">Configuration overview: 1U1L (46mm), 1U2L (36mm), 2U1L (36mm), 2U2L (26mm)</p></div>
+<p>The selection must take the following factors into account:</p>
+<ul><li>Total height of the scan data</li><li>Presence of implant analogs</li><li>Type of model to be produced</li><li>Space required for mounting in the articulator</li></ul>
+<div class="fig"><img src="imgs/img_142.jpg"><p class="cap">Model alignment with height indication for maxilla and mandible</p></div>
+
+<p>The XL configuration <strong>(60 mm)</strong> is particularly suited to complex implant cases, where implant analogs are required in both arches or extra vertical space is needed for prosthetic components.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_143.jpg"><p class="cap">Model mounted in the articulator</p></div><div class="fig"><img src="imgs/img_144.jpg"><p class="cap">XL configuration, front view</p></div></div>
+<div class="fig"><img src="imgs/img_145.jpg"><p class="cap">Model type selection menu in the RotoClick Model Creator</p></div>
+
+<h3>Model type</h3>
+<p>The available options allow the creation of standard models, models with removable dies, models with implant analogs, models with drainage holes for direct printing, and models with inspection windows to verify correct positioning of the implant analogs.</p>
+<div class="fig"><img src="imgs/img_146.jpg"><p class="cap">Overview of model type options A–G</p></div>
+
+<h3>Positioning in the articulator</h3>
+<p>To preserve the spatial position previously defined in the virtual articulator, enable the "Restore alignment to original scan data" option. This function correctly transfers the position determined in the virtual articulator into the Key Lab system.</p>
+<div class="fig"><img src="imgs/img_147.jpg"><p class="cap">Option to restore the original alignment</p></div>
+<p>If the project was not previously articulated in the virtual articulator, the models must be positioned manually. Use the Bonwill triangle and the guide lines displayed in the software window as a reference.</p>
+<div class="fig"><img src="imgs/img_148.jpg"><p class="cap">Manual positioning using the Bonwill triangle as a reference</p></div>
+
+<h2>Phase 2 — Model construction without build platform</h2>
+<div class="phase-tag">Phase 2</div>
+<p>During this step, the software generates a visualization object showing the position of the RotoClick connection elements within the model. This representation allows you to check the correct alignment of the case and verify whether the model volume is compatible with the selected attachment system.</p>
+<div class="fig"><img src="imgs/img_149.jpg"><p class="cap">Visualization object of the RotoClick connection elements</p></div>
+<div class="fig"><img src="imgs/img_150.jpg"><p class="cap">Support structures in relation to the model</p></div>
+
+<p>In some cases, the model may be off-center relative to the RotoClick mount. If the edges protrude too far over the base, this can compromise print stability. The three-dimensional manipulator (blue arrow) and the "Recover from view" command are available for correction.</p>
+<div class="fig"><img src="imgs/img_151.jpg"><p class="cap">Correcting the model alignment with the 3D manipulator</p></div>
+
+<p>Repeat the procedure for the antagonist model. Both arches must be correctly centered relative to the RotoClick mounts, to ensure a precise and stable mounting in the articulator.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_152.jpg"><p class="cap">Alignment of the antagonist model</p></div><div class="fig"><img src="imgs/img_153.jpg"><p class="cap">Support structure centered around the dental arch</p></div></div>
+<div class="fig"><img src="imgs/img_154.jpg"><p class="cap">Correctly centered model without overhang</p></div>
+
+<h2>Phase 3 — Model attachments</h2>
+<div class="phase-tag">Phase 3</div>
+<p>The software automatically loads the standard attachment <strong>rotoclick_KEY_LAB_PLUS</strong>, recommended for printing with support pins.</p>
+<div class="fig"><img src="imgs/img_155.jpg"><p class="cap">Standard attachment rotoclick_KEY_LAB_PLUS</p></div>
+<p>For direct printing on the build platform, it is recommended to replace the standard attachment with <strong>rotoclick_DRAIN_HOLES</strong> — featuring drainage holes for resin runoff and rear chamfers that make removal easier.</p>
+<div class="fig"><img src="imgs/img_156.jpg"><p class="cap">Attachment rotoclick_DRAIN_HOLES for direct printing</p></div>
+<p>In the TEXT menu, a permanent marking can be added directly on the model. It is recommended to use the configuration chosen in Phase 1 (e.g. 1U1L, 1U2L, 2U1L, 2U2L or XL) as the marking.</p>
+<div class="fig"><img src="imgs/img_157.jpg"><p class="cap">Text marking "1U2L" directly on the model</p></div>
+
+<h2>Phase 4 — Print preparation</h2>
+<div class="phase-tag">Phase 4</div>
+<p>When using print supports, make sure that no support structure interferes with the mating surfaces of the RotoClick system. The perimeter of the plate housing must remain completely free, to ensure a precise and repeatable connection in the articulator.</p>
+<div class="fig"><img src="imgs/img_158.jpg"><p class="cap">Support structures must not interfere with the mating surfaces</p></div>
+<p>For direct printing with the rotoclick_DRAIN_HOLES attachment, make sure the model's base sits fully flat on the build platform with no unwanted tilt.</p>
+<div class="fig"><img src="imgs/img_159.jpg"><p class="cap">Correct seating of the model base on the build platform</p></div>
+<p>After printing is complete, detach the model from the build platform using a thin spatula. Start detaching at the designated chamfered areas to avoid damaging the mating surfaces.</p>
+<div class="fig"><img src="imgs/img_160.jpg"><p class="cap">Detaching the model at the chamfered areas</p></div>
+
+<h2>Phase 5 — Mounting in the articulator</h2>
+<div class="phase-tag">Phase 5</div>
+<p>After cleaning and curing the models, mount the white base plates and then insert the models into the articulator.</p>
+<a class="dl" href="https://youtu.be/I4vS7ljNdaY" target="_blank">&#9658; Video: Mounting in the articulator</a>
+
+<div class="dv"></div>
+<div class="nb"><span class="pl" onclick="go('kalibrierung')">&#8594; Continue to Calibration</span> — if accuracy is unsatisfactory or for non-ARTEX articulators.</div>
+</div>
+
+<div class="pg" id="p-kalibrierung-de"><p class="pr">Rev.1 — 25/06/2026</p><h1>Kalibrierung</h1><p class="ps">Anpassung an andere Artikulatoren und Genauigkeitskontrolle</p>
+<h2>Einleitung</h2>
+<p>Der RotoClick CALIBRATOR ermöglicht die präzise Anpassung des Systems an jeden Artikulator. Die Kalibrierung ist erforderlich wenn die Passgenauigkeit im ARTEX nicht den Anforderungen entspricht, oder wenn ein Nicht-ARTEX-Artikulator verwendet wird.</p>
+<p>Das Prinzip beruht auf dem physischen Eingipsen der RotoClick-Konterplatten direkt gegen den Artikulator — nicht auf einer Softwareanpassung. Dieser Prozess kompensiert gleichzeitig alle laboreigenen Variablen (Harz, Drucker, Parameter) einmalig und dauerhaft.</p>
+<a class="dl" href="https://youtube.com/shorts/5SGnHdP6uHY?feature=share" target="_blank">&#9658; Video: RotoClick auf jedem Artikulator</a>
+
+<h2>Kalibrierkörper herstellen</h2>
+<p>Datei <strong>Rotoclick CALIBRATOR.rar</strong> herunterladen, entpacken und mit denselben Druckparametern wie reguläre RotoClick-Modelle drucken. Jeder Kalibrierkörper besteht aus einem Oberkiefer- und einem Unterkieferteil.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_161.jpg"><p class="cap">OK-Teil des Kalibrierkörpers (3D-Ansicht)</p></div><div class="fig"><img src="imgs/img_162.jpg"><p class="cap">UK-Teil des Kalibrierkörpers (3D-Ansicht)</p></div></div>
+<div class="fig"><img src="imgs/img_163.jpg"><p class="cap">OK- und UK-Teil zusammengesetzt</p></div>
+<div class="nb"><strong>Maximale Genauigkeit:</strong> Beide Konfigurationen drucken — <strong>1U 1L</strong> und <strong>2U 2L</strong> — um alle Kombinationsmöglichkeiten zu kalibrieren.</div>
+
+<h2>ARTEX-Artikulator</h2>
+<p>Nur die UK-Position kalibrieren (OK-Position: Verklebeteil aus dem Set verwenden). Kalibrierteile auf 3D-Basisplatten montieren, OK-Teil auf Key-Lab Adapter. UK-Teil mit schwarzer Konterplatte über 3 Zentrierpins ausrichten und mit Artikulationsgips gegen die Splitcast-Konterplatte fixieren. Aushärten abwarten.</p>
+<p>Wiederholen für: <strong>1U1L / 2U1L / 1U2L / 2U2L / XL</strong></p>
+
+<h2>Nicht-ARTEX-Artikulator</h2>
+<p>Beide Kalibrierkörperteile (OK + UK) mit 3D-Basisplatten und Konterplatten bestücken und den Kalibrierkörper in den Artikulator einsetzen — genau so wie zwei gewöhnliche Dentalmodelle.</p>
+<div class="fig"><img src="imgs/img_164.jpg"><p class="cap">Kalibrierkörper 2U2L eingesetzt im Artikulator, vor dem Eingipsen</p></div>
+
+<p>Zuerst den UK-Teil eingipsen — symmetrisch zentriert auf Höhe des Bonwillschen Dreiecks. Aushärten abwarten. Dann OK-Teil über die 3 Zentrierpins ausrichten und ebenfalls eingipsen.</p>
+<div class="fig"><img src="imgs/img_165.jpg"><p class="cap">UK-Teil nach dem Eingipsen — kalibriert und dauerhaft fixiert</p></div>
+
+<p>Kalibrierkörper entnehmen — die Konterplatten verbleiben dauerhaft am Artikulator und definieren den kalibrierten Aufnahmeraum.</p>
+<div class="nb"><strong>Klinischer Hinweis:</strong> Beim Nicht-ARTEX-Artikulator kann nur die Okklusion übertragen werden. Die Gesichtsbogenregistrierung bleibt an die ARTEX-Geometrie gebunden.<br><br>Durch diese Methode wird vollständige Kompatibilität zwischen ARTEX- und Nicht-ARTEX-Artikulatoren im selben Labor erreicht.</div>
+<div class="dv"></div>
+<p><span class="pl" onclick="go('zubehoer')">&#8594; Zubehör &amp; Downloads</span></p>
+</div>
+<div class="pg" id="p-kalibrierung-it"><p class="pr">Rev.1 — 25/06/2026</p><h1>Calibrazione</h1><p class="ps">Adattamento ad altri articolatori e controllo della precisione</p>
+<h2>Introduzione</h2>
+<p>Il RotoClick CALIBRATOR consente di adattare con precisione il sistema a qualsiasi articolatore. La calibrazione è necessaria quando la precisione nell'ARTEX non soddisfa i requisiti, o quando si utilizza un articolatore non-ARTEX.</p>
+<p>Il principio si basa sul fissaggio fisico con gesso delle controplacche direttamente contro l'articolatore — non su una modifica del software. Questo processo compensa simultaneamente tutte le variabili del laboratorio (resina, stampante, parametri) in modo definitivo e permanente.</p>
+<a class="dl" href="https://youtube.com/shorts/5SGnHdP6uHY?feature=share" target="_blank">&#9658; Video: RotoClick su qualsiasi articolatore</a>
+
+<h2>Produzione del corpo di calibrazione</h2>
+<p>Scaricare il file <strong>Rotoclick CALIBRATOR.rar</strong>, estrarre e stampare con gli stessi parametri dei modelli regolari. Ogni corpo è composto da una parte mascellare e una mandibolare.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_166.jpg"><p class="cap">Parte mascellare del corpo di calibrazione (vista 3D)</p></div><div class="fig"><img src="imgs/img_167.jpg"><p class="cap">Parte mandibolare del corpo di calibrazione (vista 3D)</p></div></div>
+<div class="fig"><img src="imgs/img_168.jpg"><p class="cap">Parte mascellare e mandibolare assemblate</p></div>
+<div class="nb"><strong>Massima precisione:</strong> Stampare entrambe le configurazioni — <strong>1U 1L</strong> e <strong>2U 2L</strong> — per calibrare tutte le combinazioni possibili.</div>
+
+<h2>Articolatore ARTEX</h2>
+<p>Calibrare solo la posizione mandibolare (mascellare: usare il pezzo adesivo incluso nel set). Montare le parti di calibrazione sulle basi 3D, la parte mascellare sull'adattatore Key Lab. Allineare la parte mandibolare con la controplacca nera tramite i 3 pin di centraggio e fissare con gesso contro la controplacca Splitcast. Attendere l'indurimento.</p>
+<p>Ripetere per: <strong>1U1L / 2U1L / 1U2L / 2U2L / XL</strong></p>
+
+<h2>Articolatore non-ARTEX</h2>
+<p>Montare su entrambe le parti le basi 3D e le controplacche RotoClick e inserire il corpo di calibrazione nell'articolatore — esattamente come due normali modelli dentali.</p>
+<div class="fig"><img src="imgs/img_169.jpg"><p class="cap">Corpo di calibrazione 2U2L inserito nell'articolatore, prima del gesso</p></div>
+
+<p>Fissare prima la parte mandibolare con gesso — centrata simmetricamente all'altezza del triangolo di Bonwill. Attendere l'indurimento. Allineare poi la parte mascellare tramite i 3 pin e fissare anch'essa.</p>
+<div class="fig"><img src="imgs/img_170.jpg"><p class="cap">Parte mandibolare dopo il fissaggio con gesso — calibrata e fissata permanentemente</p></div>
+
+<p>Rimuovere il corpo di calibrazione — le controplacche rimangono fissate permanentemente all'articolatore e definiscono lo spazio di alloggiamento calibrato.</p>
+<div class="nb"><strong>Nota clinica:</strong> Con un articolatore non-ARTEX viene trasferita esclusivamente l'occlusione. La registrazione dell'arco facciale rimane legata alla geometria ARTEX.<br><br>Questo metodo garantisce piena compatibilità tra articolatori ARTEX e non-ARTEX nello stesso laboratorio.</div>
+<div class="dv"></div>
+<p><span class="pl" onclick="go('zubehoer')">&#8594; Accessori &amp; Download</span></p>
+</div>
+<div class="pg" id="p-kalibrierung-en"><p class="pr">Rev.1 — 25/06/2026</p><h1>Calibration</h1><p class="ps">Adapting to other articulators and accuracy control</p>
+<h2>Introduction</h2>
+<p>The RotoClick CALIBRATOR enables precise adaptation of the system to any articulator. Calibration is required when the fit accuracy in the ARTEX no longer meets requirements, or when a non-ARTEX articulator is used.</p>
+<p>The principle is based on physically plastering the RotoClick counter-plates directly against the articulator — not on a software adjustment. This process simultaneously compensates, once and permanently, for all lab-specific variables (resin, printer, parameters).</p>
+<a class="dl" href="https://youtube.com/shorts/5SGnHdP6uHY?feature=share" target="_blank">&#9658; Video: RotoClick on any articulator</a>
+
+<h2>Producing the calibration body</h2>
+<p>Download the file <strong>Rotoclick CALIBRATOR.rar</strong>, extract it, and print with the same parameters as your regular RotoClick models. Each calibration body consists of a maxillary and a mandibular part.</p>
+<div class="fig2"><div class="fig"><img src="imgs/img_171.jpg"><p class="cap">Maxillary part of the calibration body (3D view)</p></div><div class="fig"><img src="imgs/img_172.jpg"><p class="cap">Mandibular part of the calibration body (3D view)</p></div></div>
+<div class="fig"><img src="imgs/img_173.jpg"><p class="cap">Maxillary and mandibular parts assembled</p></div>
+<div class="nb"><strong>Maximum accuracy:</strong> Print both configurations — <strong>1U 1L</strong> and <strong>2U 2L</strong> — to calibrate all possible combinations.</div>
+
+<h2>ARTEX articulator</h2>
+<p>Only the mandibular position needs to be calibrated (for the maxillary position, use the bonded piece included in the set). Mount the calibration parts on the 3D base plates, the maxillary part on the Key Lab adapter. Align the mandibular part with the black counter-plate using the 3 centering pins, and fix with articulation plaster against the Splitcast counter-plate. Wait for it to fully set.</p>
+<p>Repeat for the desired combinations: <strong>1U1L / 2U1L / 1U2L / 2U2L / XL</strong></p>
+
+<h2>Non-ARTEX articulator</h2>
+<p>Fit both parts of the calibration body with the 3D base plates and RotoClick counter-plates, and insert the calibration body into the articulator — exactly as you would with two ordinary dental models.</p>
+<div class="fig"><img src="imgs/img_174.jpg"><p class="cap">2U2L calibration body inserted in the articulator, before plastering</p></div>
+
+<p>Plaster the mandibular part first — symmetrically centered at the height of the Bonwill triangle. Wait for it to fully set. Then align the maxillary part via the 3 centering pins and plaster it as well.</p>
+<div class="fig"><img src="imgs/img_175.jpg"><p class="cap">Mandibular part after plastering — calibrated and permanently fixed</p></div>
+
+<p>Remove the calibration body — the counter-plates remain permanently attached to the articulator and define the calibrated seating space.</p>
+<div class="nb"><strong>Clinical note:</strong> With a non-ARTEX articulator, only the occlusion can be transferred. Facebow registration remains tied to ARTEX geometry.<br><br>This method achieves full compatibility between ARTEX and non-ARTEX articulators within the same laboratory.</div>
+<div class="dv"></div>
+<p><span class="pl" onclick="go('zubehoer')">&#8594; Accessories &amp; Downloads</span></p>
+</div>
+
+<div class="pg" id="p-zubehoer-de"><p class="pr">Zubehör</p><h1>Zubehör &amp; Downloads</h1><p class="ps">Alle Dateien zum Herunterladen</p><h2>Exocad Bibliotheken</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Kalibrierung</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Extractor</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a></div>
+
+<div class="pg" id="p-zubehoer-it"><p class="pr">Accessori</p><h1>Accessori &amp; Download</h1><p class="ps">Tutti i file disponibili per il download</p><h2>Librerie Exocad</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Calibrazione</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Estrattore</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a></div>
+
+<div class="pg" id="p-zubehoer-en"><p class="pr">Accessories</p><h1>Accessories &amp; Downloads</h1><p class="ps">All files available for download</p><h2>Exocad Libraries</h2><a class="dl" href="https://drive.google.com/file/d/1nM-eDcBlIPEwYn6iby5893_sji-pkiXX/view?usp=drive_link" target="_blank">&#8595; library_V6.zip</a><h2>Calibration</h2><a class="dl" href="#" target="_blank">&#8595; Rotoclick CALIBRATOR.rar</a><h2>Extractor</h2><a class="dl" href="#" target="_blank">&#8595; extractor_v2.stl</a></div>
+
+  </div>
+</div>
+
+<script>
+const PW="RotoClick2026!";
+let lang="de",page="home";
+function login(){
+  if(document.getElementById("pw").value===PW){
+    document.getElementById("ls").style.display="none";
+    document.getElementById("app").style.display="flex";
+    go("home");
+  }else{
+    document.getElementById("le").style.display="block";
+    document.getElementById("pw").value="";
+  }
+}
+function setLang(l,btn){
+  lang=l;
+  document.querySelectorAll(".lbtn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("nd").style.display=l==="de"?"block":"none";
+  document.getElementById("ni").style.display=l==="it"?"block":"none";
+  document.getElementById("nn").style.display=l==="en"?"block":"none";
+  go(page);
+}
+function go(p){
+  page=p;
+  document.querySelectorAll(".pg").forEach(el=>el.classList.remove("active"));
+  const el=document.getElementById("p-"+p+"-"+lang);
+  if(el)el.classList.add("active");
+  document.querySelectorAll(".ni").forEach(b=>{
+    b.classList.remove("active");
+    if(b.getAttribute("onclick")&&b.getAttribute("onclick").includes("'"+p+"'"))b.classList.add("active");
+  });
+  window.scrollTo(0,0);
+}
+document.addEventListener("DOMContentLoaded",()=>go("home"));
+</script>
+</body>
+</html>
