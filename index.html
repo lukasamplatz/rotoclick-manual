@@ -8,16 +8,7 @@
 :root{--black:#0a0a0a;--white:#fff;--g1:#f5f5f5;--g2:#e8e8e8;--g4:#9a9a9a;--g6:#5a5a5a;--sw:280px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--white);color:var(--black);min-height:100vh;display:flex;flex-direction:column}
-#ls{position:fixed;inset:0;background:var(--white);display:flex;align-items:center;justify-content:center;z-index:1000;flex-direction:column;gap:40px}
-#ls img{width:240px}
-.lb{display:flex;flex-direction:column;gap:14px;width:300px}
-.lb input{padding:13px 16px;border:1.5px solid var(--g2);font-size:15px;outline:none;background:var(--g1)}
-.lb input:focus{border-color:var(--black)}
-.lb button{padding:13px;background:var(--black);color:var(--white);border:none;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
-.lb button:hover{opacity:.75}
-.le{color:#c0392b;font-size:13px;text-align:center;display:none}
-.ll{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--g4);text-align:center}
-#app{display:none;flex-direction:row;min-height:100vh}
+#app{display:flex;flex-direction:row;min-height:100vh}
 #sb{width:var(--sw);min-height:100vh;background:var(--g1);border-right:1px solid var(--g2);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
 .sl{padding:24px 20px 18px;border-bottom:1px solid var(--g2)}
 .sl img{width:130px}
@@ -93,16 +84,6 @@ ul li::before{content:'\2013';position:absolute;left:0;color:var(--g4)}
 </style>
 </head>
 <body>
-
-<div id="ls">
-  <img src="img_000.png" alt="RotoClick">
-  <div class="lb">
-    <p class="ll">Online Manual — Access</p>
-    <input type="password" id="pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()">
-    <button onclick="login()">Confirm access</button>
-    <p class="le" id="le">Incorrect password.</p>
-  </div>
-</div>
 
 <div id="app">
   <div id="sb" class="collapsed">
@@ -960,18 +941,7 @@ Web: <a href="https://www.dentag-italia.com" target="_blank" style="color:var(--
 </div>
 
 <script>
-const PW="RotoClick2026!";
 let lang="de",page="home";
-function login(){
-  if(document.getElementById("pw").value===PW){
-    document.getElementById("ls").style.display="none";
-    document.getElementById("app").style.display="flex";
-    go("home");
-  }else{
-    document.getElementById("le").style.display="block";
-    document.getElementById("pw").value="";
-  }
-}
 function setLang(l,btn){
   lang=l;
   document.querySelectorAll(".lbtn").forEach(b=>b.classList.remove("active"));
