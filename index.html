@@ -965,7 +965,7 @@ function go(p){
   window.scrollTo(0,0);
 closeMenuOnNav();
 }
-go("home");
+document.addEventListener("DOMContentLoaded",()=>go("home"));
 
 function toggleMenu(){
   var sb=document.getElementById('sb');
